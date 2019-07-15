@@ -1,0 +1,18 @@
+﻿@using System.Globalization;
+@model decimal?
+
+
+@{
+    NumberFormatInfo formatProvider = new System.Globalization.CultureInfo("en-US").NumberFormat;
+
+    formatProvider.NumberDecimalSeparator = ",";
+
+    if (Model.HasValue)
+    {
+        <input type="text" name="Gh" class="form-control" value="@Model.Value.ToString("N", formatProvider)" />
+    }
+    else
+    {
+        <input type="text" name="Gh" class="form-control" value="0,00" />
+    }
+}

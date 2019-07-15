@@ -1,0 +1,203 @@
+﻿@using AquaMarket.Models
+@model AquaMarket.Models.Plant
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Plant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <!--taxonomy-->
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlantName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlantName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlantSpecies.PlantFamily.FamilyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlantSpecies.PlantFamily.FamilyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlantSpecies.SpeciesName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlantSpecies.SpeciesName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OriginCountry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OriginCountry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <!--characteristics-->
+        <dt>
+            @Html.DisplayNameFor(model => model.Hight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GrowthSpeed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GrowthSpeed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Coloration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Coloration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Сomplexity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Сomplexity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usage)
+        </dd>
+
+        <!--environment-->
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Light)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Light)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinTemp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinTemp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxTemp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxTemp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinPh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinPh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxPh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxPh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinGh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinGh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxGh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxGh)
+        </dd>
+
+
+        <dt>
+            Files
+        </dt>
+        <dd>
+            <ul>
+                @foreach (var file in Model.Files)
+                {
+
+                    <li>
+                        <img src="@Url.Content("~/Files/" + file.FileName)" width="70" height="100" alt="Plant image">
+                    </li>
+
+                }
+
+            </ul>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
