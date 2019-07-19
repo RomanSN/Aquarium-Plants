@@ -4,119 +4,93 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div id="Catalogue" class="partial_Lable">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Light)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GrowthSpeed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Hight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Temp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ph)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Kh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Count)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            Files
-        </th>
-        <th>
-            Purchases count
-        </th>
+    <h2>Plant catalogue from Z to Z</h2>
 
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 
-@foreach (var item in Model) {
-    <tr>
+    @foreach (var item in Model)
+    {
+        <div class="plantItem row">
+            <div class="col-md-4">
+                <div>
+                    <h3>@item.PlantName</h3>
+                </div>
+                <div>
+                    <a href="@Url.Content("~/Files/" + item.File.FileName)">
+                        <img src="@Url.Content("~/Files/" + item.File.FileName)" height="200" alt="Plant image">
+                    </a>
+                </div>
+            </div>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Light)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GrowthSpeed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Temp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ph)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Count)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @foreach (var file in item.Files)
-            {
-                <a href="@Url.Content("~/Files/" + file.FileName)">
-                <img src="@Url.Content("~/Files/" + file.FileName)" width="80" height="100" alt="Plant image"></a><br />
-            }
-        </td>
-        <td>
-            1
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+            <div class="col-md-8">
+                <div class="characteristics_table">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Location)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Coloration)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Light)
+                            </th>
+                            <th>
+                                <p>Temp. (C*)</p>
+                            </th>
+                            <th>
+                                <p>pH range</p>
+                            </th>
+                            <th>
+                                <p>gH range</p>
+                            </th>
+                        </tr>
 
-</table>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Coloration)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Light)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MinTemp) -
+                                @Html.DisplayFor(modelItem => item.MaxTemp)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MinPh) - 
+                                @Html.DisplayFor(modelItem => item.MaxPh)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MinGh) -
+                                @Html.DisplayFor(modelItem => item.MaxGh)
+                            </td>
+                            
+                        </tr>
+                    </table>
+                </div>
+                <div class="plant_description">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </div>
+            </div>
+            
+            
+
+            <div>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </div>
+
+
+        </div>
+    }
+</div>

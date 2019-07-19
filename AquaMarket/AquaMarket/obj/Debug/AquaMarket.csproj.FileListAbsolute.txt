@@ -222,8 +222,6 @@ C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\System.Web.W
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\System.Web.WebPages.dll
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\System.Web.WebPages.Razor.dll
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\WebGrease.dll
-C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\EntityFramework.xml
-C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\EntityFramework.SqlServer.xml
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\PagedList.xml
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\PagedList.Mvc.xml
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\System.Net.Http.Formatting.xml
@@ -253,8 +251,6 @@ C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\Microsoft.Ow
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\ru\EntityFramework.resources.dll
-C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\ru\EntityFramework.SqlServer.resources.dll
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\ru\System.Web.Helpers.resources.dll
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\ru\System.Web.Mvc.resources.dll
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\ru\System.Web.Optimization.resources.dll
@@ -265,7 +261,6 @@ C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\ru\System.We
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\ru\Microsoft.AspNet.Identity.Core.resources.dll
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\ru\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\bin\ru\Microsoft.AspNet.Identity.EntityFramework.resources.dll
-C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.csprojAssemblyReference.cache
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.Migrations.MigrateDB.resources
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.Migrations.MigrateDB2.resources
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.Migrations.MigrateDB3.resources
@@ -283,3 +278,6 @@ C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMa
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.csproj.CopyComplete
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.dll
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.pdb
+C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.Migrations.MigrateDB5.resources
+C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.Migrations.MigrateDB6.resources
+C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.Migrations.MigrateDB7.resources

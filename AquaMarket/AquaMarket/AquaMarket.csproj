@@ -208,6 +208,18 @@
     <Compile Include="Migrations\201907150548175_MigrateDB4.Designer.cs">
       <DependentUpon>201907150548175_MigrateDB4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907181854558_MigrateDB5.cs" />
+    <Compile Include="Migrations\201907181854558_MigrateDB5.Designer.cs">
+      <DependentUpon>201907181854558_MigrateDB5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907181909362_MigrateDB6.cs" />
+    <Compile Include="Migrations\201907181909362_MigrateDB6.Designer.cs">
+      <DependentUpon>201907181909362_MigrateDB6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907182107177_MigrateDB7.cs" />
+    <Compile Include="Migrations\201907182107177_MigrateDB7.Designer.cs">
+      <DependentUpon>201907182107177_MigrateDB7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Models\Family.cs" />
     <Compile Include="Models\PlantViewModel.cs" />
@@ -1052,6 +1064,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907150548175_MigrateDB4.resx">
       <DependentUpon>201907150548175_MigrateDB4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907181854558_MigrateDB5.resx">
+      <DependentUpon>201907181854558_MigrateDB5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907181909362_MigrateDB6.resx">
+      <DependentUpon>201907181909362_MigrateDB6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907182107177_MigrateDB7.resx">
+      <DependentUpon>201907182107177_MigrateDB7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

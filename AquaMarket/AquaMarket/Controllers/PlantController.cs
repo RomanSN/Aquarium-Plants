@@ -58,8 +58,8 @@ namespace AquaMarket.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Name,Description,Location,Light,GrowthSpeed,Hight,Temp,Ph,Gh,Kh,Price,Count,Images")]
-        Plant plant)
+        public async Task<ActionResult> Create([Bind(Include = "PlantName,Description,Light,MinTemp,MaxTemp,MinPh,MaxPh,MinGh,MaxGh," +
+                                "GrowthSpeed,Hight,Coloration,Area,Location,Usage,Сomplexity,OriginCountry,Type,PlantSpecies,Image")] Plant plant)
         {
             repo = new PlantRepo();
             if (ModelState.IsValid)
@@ -93,8 +93,8 @@ namespace AquaMarket.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Name,Description,Location,Light,GrowthSpeed,Hight,Temp,Ph,Gh,Kh,Price,Count,Images")]
-                                              Plant plant)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,PlantName,Description,Light,MinTemp,MaxTemp,MinPh,MaxPh,MinGh,MaxGh," +
+                                "GrowthSpeed,Hight,Coloration,Area,Location,Usage,Сomplexity,OriginCountry,Type,PlantSpecies,Image")] Plant plant)
         {
             repo = new PlantRepo();
             if (ModelState.IsValid)
@@ -103,7 +103,7 @@ namespace AquaMarket.Controllers
                 return RedirectToAction("Index");
             }
             Plant plantDB = await repo.Edit(plant.Id);
-            plant.Files = plantDB.Files;
+            plant.File = plantDB.File;
             return View(plant);//RedirectToAction("Edit", new { id =plant.Id });
         }
        

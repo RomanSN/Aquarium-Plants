@@ -12,13 +12,20 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.PlantName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.PlantName)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.PlantSpecies)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlantSpecies)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
@@ -26,56 +33,14 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.Temp)
+            <span>Image</span>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Temp)
+             <img src="@Url.Content("~/Files/" + Model.File.FileName)"  height="200" alt="Plant image">
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GrowthSpeed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GrowthSpeed)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ph)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ph)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Gh)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gh)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kh)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kh)
-        </dd>
-
-       
 
     </dl>
 

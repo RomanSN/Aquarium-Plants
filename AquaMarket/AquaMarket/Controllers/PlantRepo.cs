@@ -13,29 +13,84 @@ namespace AquaMarket.Controllers
     {
         private AquaDBContext db;
 
-        public async Task<ICollection<Plant>> getAllPlants()
+        [HttpGet]
+        public async Task<IEnumerable<Plant>> getAllPlants(string area, string light, string complexity, int? t, decimal? ph, decimal? gh )
         {
             db = new AquaDBContext();
-            return await db.Plants.Include(p => p.Files).ToListAsync();
+            IEnumerable<Plant> result = await db.Plants.Include(p=>p.PlantSpecies).ToListAsync();
+
+            if (area != null && !area.Equals("Area"))
+            {
+                result = result.Where(p => p.Area == area);
+            }
+            if (light != null && !light.Equals("Lighting"))
+            {
+                result = result.Where(p => p.Light == light);
+            }
+            if (complexity != null && !complexity.Equals("Complexity"))
+            {
+                result = result.Where(p => p.Сomplexity == complexity);
+            }
+            if (t!=null)
+            {
+                result = result.Where(p => t >= p.MinTemp && t<= p.MaxTemp);
+            }
+            if (ph != null)
+            {
+                result = result.Where(p => t >= p.MinPh && t <= p.MaxPh);
+            }
+            if (gh != null)
+            {
+                result = result.Where(p => t >= p.MinGh && t <= p.MaxGh);
+            }
+
+            PlantViewModel pvm = new PlantViewModel
+            {
+                Areas = new SelectList(new List<string>()
+                {
+                    "Areas",
+                    "Background",
+                    "Midground",
+                    "Foreground"
+                }),
+
+                Light = new SelectList(new List<string>()
+                {
+                    "Light",
+                    "Shady",
+                    "Shady to semi-shady",
+                    "Semi-shady to sunny",
+                    "Sunny"
+                }),
+
+                Complexity = new SelectList(new List<string>()
+                {
+                    "Complexity",
+                    "Easy",
+                    "Average",
+                    "Demanding"
+                }),
+
+            };
+
+            return result;
         }
 
         public async Task <JsonResult>  Autocomplete(string term)
         {
             db = new AquaDBContext();
             db.Configuration.ProxyCreationEnabled = false;
+
             IEnumerable<Plant> plants = await db.Plants.ToListAsync();
             List<Plant> filteredPlants = new List<Plant>();
             foreach (Plant p in plants){
                 string name = p.PlantName.ToLower();
-                string t = term;
-                if (name.Contains(t.ToLower()))
+                string t = term.ToLower();
+                if (name.Contains(t))
                 {
                     filteredPlants.Add(p);
                 }
             }
-            //IEnumerable<Plant> filteredPlants = plants.Where(p=>p.Name.ToLower().Contains(term.ToLower())==true);
-            //List<Plant> filteredItems = (List<Plant>)plants.Where
-            //(item => item.Name.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0);
            
             var result = Json(filteredPlants, JsonRequestBehavior.AllowGet);                    
             return result;
@@ -44,7 +99,7 @@ namespace AquaMarket.Controllers
         public async Task<Plant> Details(int? id)
         {
             db = new AquaDBContext();
-            Plant plant = await db.Plants.Include(p => p.PlantSpecies).FirstOrDefaultAsync(t => t.Id == id);
+            Plant plant = await db.Plants.FirstOrDefaultAsync(t => t.Id == id);
             return plant;
         }
 
@@ -53,31 +108,31 @@ namespace AquaMarket.Controllers
             db = new AquaDBContext();
             db.Plants.Add(plant);
             await db.SaveChangesAsync();
+
             ICollection<Plant> allplants = await db.Plants.ToListAsync();
             Plant created = allplants.Last();
-            foreach (var file in plant.Images)
-            {
-                if (file != null)
+            
+                if (plant.Image != null)
                 {
-                    string fileName = System.IO.Path.GetFileName(file.FileName);
+                    string fileName = System.IO.Path.GetFileName(plant.Image.FileName);
                     string path = System.Web.HttpContext.Current.Server.MapPath("~/Files/" + fileName);
-                    file.SaveAs(path);
+                    plant.Image.SaveAs(path);
                     File NewFile = new File
                     {
                         FileName = fileName,
-                        FileType = System.IO.Path.GetExtension(file.FileName),
-                        PlantId = plant.Id
+                        FileType = System.IO.Path.GetExtension(created.Image.FileName),
+                        PlantId = created.Id
                     };
                     db.Files.Add(NewFile);
                     await db.SaveChangesAsync();
                 }
-            }
+            
         }
 
         public async Task<Plant> Edit(int? id)
         {
             db = new AquaDBContext();
-            Plant plant = await db.Plants.Include(p=>p.Files).FirstOrDefaultAsync(t => t.Id == id);
+            Plant plant = await db.Plants.FirstOrDefaultAsync(t => t.Id == id);
             return plant;
         }
 
@@ -87,23 +142,22 @@ namespace AquaMarket.Controllers
             db.Entry(plant).State = EntityState.Modified;
             await db.SaveChangesAsync();
 
-            foreach(var image in plant.Images)
-            {
-                if (image != null)
+           
+                if (plant.Image != null)
                 {
-                    string fileName = System.IO.Path.GetFileName(image.FileName) + DateTime.Now.ToString();
+                    string fileName = System.IO.Path.GetFileName(plant.Image.FileName) + DateTime.Now.ToString();
                     string path = System.Web.HttpContext.Current.Server.MapPath("~/Files/" + fileName);
-                    image.SaveAs(path);
+                    plant.Image.SaveAs(path);
                     File NewFile = new File
                     {
                         FileName = fileName,
-                        FileType = System.IO.Path.GetExtension(image.FileName),
+                        FileType = System.IO.Path.GetExtension(plant.Image.FileName),
                         PlantId = plant.Id
                     };
                     db.Files.Add(NewFile);
                     await db.SaveChangesAsync();
                 }
-            }
+            
             
 
         }

@@ -46,11 +46,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.PlantType)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Type)
+            @Html.DisplayFor(model => model.PlantType)
         </dd>
 
         <dt>
@@ -179,20 +179,12 @@
 
 
         <dt>
-            Files
+            Image
         </dt>
         <dd>
-            <ul>
-                @foreach (var file in Model.Files)
-                {
-
-                    <li>
-                        <img src="@Url.Content("~/Files/" + file.FileName)" width="70" height="100" alt="Plant image">
-                    </li>
-
-                }
-
-            </ul>
+         
+             <img src="@Url.Content("~/Files/" + Model.File.FileName)" width="70" height="100" alt="Plant image">
+                    
         </dd>
 
     </dl>
