@@ -281,3 +281,5 @@ C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMa
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.Migrations.MigrateDB5.resources
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.Migrations.MigrateDB6.resources
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.Migrations.MigrateDB7.resources
+C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.csprojAssemblyReference.cache
+C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarket\obj\Debug\AquaMarket.Migrations.MigrateDB8.resources

@@ -154,7 +154,9 @@ div {
     border: 0px solid #134D40;
     padding: 0px;
 }
+
 /* Set padding to keep content from hitting the edges */
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -204,16 +206,18 @@ textarea {
 /*Header section (LogIn, carosel, nawbar, icons )*/
 
 /*glyphycon size)*/
+
 .btn::before {
     font-size: 12px;
 }
-
 .content {
     display:block;
     width: 90%;
     margin:auto;
 }
+
 /*Login section*/
+
 #login_login {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -252,13 +256,16 @@ textarea {
 }
 
 /*Navigation section*/
+
 .navbar-inverse {
     border-radius: 10px;
     background-image: url(~/../../Images/top_menu_bg.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 /*Site sections links*/
+
 #sections a {
     display: flex;
     flex-direction: column;
@@ -368,6 +375,7 @@ textarea {
 }
 
 /*Foter section*/
+
 #footer ul{
     text-align:center;
 }
@@ -407,12 +415,97 @@ textarea {
     color: azure;
 }
 
-                                /*Pages partial*/
+                                /*Partial pages*/
 /*Contact page*/
+
 #contact {
     font-size: 1.7rem;
     color: #D5D5D5;
 }
 #contact h2 {
     text-align:center;
+}
+
+/*Catalogue header*/
+
+#Catalogue {
+    margin:7px;
+}
+#Catalogue h2 {
+    text-align: center;
+}
+#catalogue_header {
+    background-color: #72DDC7;
+    border-radius: 6px;
+}
+#catalogue_header hr{
+   margin-bottom:0px;
+}
+.pagesizer_sections {
+    display: flex;
+}
+
+.pagesizer_sections [class*="col-"] {
+    height: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.page_count {
+    text-align: left;
+}
+.page_count p{
+    font-size:1.3em;
+    font-weight:200;
+}
+.page_count input {
+    border-radius: 3px;
+}
+
+.page_count option {
+    min-height:1em;
+    padding-bottom:2px;
+    padding-top:2px;
+}
+.page_count select {
+    padding: 3px;
+}
+
+.list_pager {
+    text-align:center;
+}
+
+.create_section a {
+    float: right !important;
+}
+/*Plant items*/
+.plantItem {
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 5px;
+    margin-top: 10px !important;
+    background-color: honeydew;
+    padding:10px;
+}
+.plantitem_caption a{
+    color: darkgray;
+}
+
+.characteristics_table {
+    max-height: 50px;
+    border: 1px solid black !important;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+.plantItem table th {
+    padding: 2px !important;
+    text-align: center;
+    background-color: #7FEAB5;
+}
+.plantItem table td {
+    padding: 2px !important;
+    text-align: center;
+    background-color: #E4FFFB;
 }

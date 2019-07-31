@@ -7,17 +7,17 @@ namespace AquaMarket.Models
     {
         public int Id { get; set; }  
 
-        public string SpeciesName { get; set; }
+        public string Name { get; set; }
 
         public string Description { get; set; }
         [Required]
         public int FamilyId { get; set; }
-        [Required]
+        
         public Family PlantFamily { get; set; }
 
-        public HashSet<int> PlantsIds { get; set; }
+        public virtual HashSet<int> PlantsIds { get; set; }
 
-        public HashSet<Plant> Plants { get; set; }
+        public virtual HashSet<Plant> Plants { get; set; }
 
         public Species()
         {

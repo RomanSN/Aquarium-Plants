@@ -1,0 +1,12 @@
+﻿@using System.Globalization;
+@model decimal?
+
+
+
+@{
+    NumberFormatInfo formatProvider = new System.Globalization.CultureInfo("en-US").NumberFormat;
+
+    formatProvider.NumberDecimalSeparator = ",";
+
+    @Model.Value.ToString("N", formatProvider)
+}

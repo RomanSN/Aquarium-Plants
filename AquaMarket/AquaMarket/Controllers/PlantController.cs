@@ -2,12 +2,18 @@
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Collections;
+using PagedList;
+using System.Web;
+using System.Collections.Generic;
 
 namespace AquaMarket.Controllers
 {
     public class PlantController : Controller
     {
         private PlantRepo repo;
+
+        public PageInfo PageInfo { get; private set; }
 
         public PlantController()
         {
@@ -24,10 +30,13 @@ namespace AquaMarket.Controllers
         }
 
         // GET: Plant
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string area, string light, string complexity, int? t, decimal? ph, decimal? gh,
+             int? pageIndex, int? pageSize)
         {
             repo = new PlantRepo();
-            return View(await repo.getAllPlants());
+            var pvm = await repo.getAllPlants(area, light, complexity, t, ph, gh, pageIndex, pageSize);
+
+            return View(pvm);
         }
 
         // GET: Plant/Details/5
@@ -47,9 +56,11 @@ namespace AquaMarket.Controllers
         }
 
         // GET: Plants/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            ViewBag.PlantSpeciesNames = new string[3] { "test", "test", "test" };
+            repo = new PlantRepo();
+            IEnumerable<Species> species = await repo.GetSpecies();
+            ViewBag.PlantSpeciesNames = new SelectList(species);
             return View();
         }
 
@@ -93,17 +104,20 @@ namespace AquaMarket.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,PlantName,Description,Light,MinTemp,MaxTemp,MinPh,MaxPh,MinGh,MaxGh," +
-                                "GrowthSpeed,Hight,Coloration,Area,Location,Usage,Сomplexity,OriginCountry,Type,PlantSpecies,Image")] Plant plant)
+        public async Task<ActionResult> Edit( Plant plant)
         {
             repo = new PlantRepo();
+            Plant plantDB = await repo.Edit(plant.Id);
+            plant.FileId = plantDB.FileId;
+            
+            
             if (ModelState.IsValid)
             {
                 await repo.Edit(plant);
                 return RedirectToAction("Index");
             }
-            Plant plantDB = await repo.Edit(plant.Id);
             plant.File = plantDB.File;
+
             return View(plant);//RedirectToAction("Edit", new { id =plant.Id });
         }
        

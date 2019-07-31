@@ -8,9 +8,7 @@ $('document').ready(function () {
 });
 
 $('document').ready(function () {
-    var flowers = ["Астра", "Нарцисс", "Роза", "Пион", "Примула",
-        "Подснежник", "Мак", "Первоцвет", "Петуния", "Фиалка"];
-    //source: app.Urls.baseUrl + 'Plant/Autocomplete'
+   
 
     $('#search').autocomplete({
         
@@ -24,7 +22,7 @@ $('document').ready(function () {
                     response($.map(data,
                         function (item) {
                             return {
-                                label: item.Name,
+                                label: item.PlantName,
                                 value1: item.Id
                             }
                         }));

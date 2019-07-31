@@ -33,18 +33,18 @@ namespace AquaMarket.Models
         [Range(typeof(int), "10", "35", ErrorMessage = "Min value is 10, max value is 35.")]
         public int? MaxTemp { get; set; }
         [Required]
-        [UIHint("NullablePhTemplate")]
+        [UIHint("NullableMinPhTemplate")]
         [Range(typeof(decimal), "1,0", "15,0", ErrorMessage = "Min value is 1, max value is 15. Double separator is ','")]
         public decimal? MinPh { get; set; }
-        [UIHint("NullablePhTemplate")]
+        [UIHint("NullableMaxPhTemplate")]
         [Range(typeof(decimal), "1,0", "15,0", ErrorMessage = "Min value is 1, max value is 15. Double separator is ','")]
         public decimal? MaxPh { get; set; }
         [Required]
-        [UIHint("NullableGhTemplate")]
+        [UIHint("NullableMinGhTemplate")]
         [Range(typeof(decimal), "1,0", "30,0", ErrorMessage = "Min value is 1, max value is 15. Double separator is ','")]
         public decimal? MinGh { get; set; } 
         [Required]
-        [UIHint("NullableGhTemplate")]
+        [UIHint("NullableMaxGhTemplate")]
         [Range(typeof(decimal), "1,0", "30,0", ErrorMessage = "Min value is 1, max value is 15. Double separator is ','")]
         public decimal? MaxGh { get; set; }
         
@@ -80,7 +80,7 @@ namespace AquaMarket.Models
         
         [Required]
         public int? SpeciesId { get; set; }
-        [Required]
+        //[Required]
         public virtual Species PlantSpecies { get; set; }
 
         //resources
@@ -96,7 +96,8 @@ namespace AquaMarket.Models
 
         public Plant()
         {
-            File = new File(); 
+            File = new File();
+           
         }
     }
 }

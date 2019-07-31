@@ -6,20 +6,20 @@ namespace AquaMarket.Models
     {
         public int Id { get; set; }
 
-        public string FamilyName { get; set; }
+        public string Name { get; set; }
 
         public string Description { get; set; }
 
         public HashSet<int> SpeciesIds { get; set; }    
 
-        public HashSet<Plant> Species { get; set; }
+        public HashSet<Species> Species { get; set; }
 
 
 
         public Family()    
         {
             SpeciesIds = new HashSet<int>();
-            Species = new HashSet<Plant>();
+            Species = new HashSet<Species>();
         }
     }
 }

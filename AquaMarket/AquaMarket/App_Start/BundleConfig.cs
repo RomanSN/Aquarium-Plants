@@ -23,7 +23,7 @@ namespace AquaMarket
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/Site.css", "~/Content/PagedList.css", "~/Content/jquery-ui.*"));
+                      "~/Content/Site.css",  "~/Content/jquery-ui.*"));//"~/Content/PagedList.css",
         }
     }
 }

@@ -10,7 +10,7 @@ namespace AquaMarket.Models
     {
         public IEnumerable<Plant> Plants { get; set; }
 
-        public SelectList Areas { get; set; }
+        public SelectList Area { get; set; }
         public SelectList Light { get; set; }
         public SelectList Complexity { get; set; }
         

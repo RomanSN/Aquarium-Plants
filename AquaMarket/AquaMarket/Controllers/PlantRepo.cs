@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AquaMarket.Models;
+using PagedList;
 
 namespace AquaMarket.Controllers
 {
@@ -13,11 +14,13 @@ namespace AquaMarket.Controllers
     {
         private AquaDBContext db;
 
-        [HttpGet]
-        public async Task<IEnumerable<Plant>> getAllPlants(string area, string light, string complexity, int? t, decimal? ph, decimal? gh )
+        //[HttpGet]
+        public async Task<PlantViewModel> getAllPlants(string area, string light,
+             string complexity, int? t, decimal? ph, decimal? gh, int? pageIndex, int? pageSize)
         {
+           
             db = new AquaDBContext();
-            IEnumerable<Plant> result = await db.Plants.Include(p=>p.PlantSpecies).ToListAsync();
+            IEnumerable<Plant> result = await db.Plants.Include(p => p.File).Include(p => p.PlantSpecies).ToListAsync();
 
             if (area != null && !area.Equals("Area"))
             {
@@ -44,11 +47,45 @@ namespace AquaMarket.Controllers
                 result = result.Where(p => t >= p.MinGh && t <= p.MaxGh);
             }
 
+            //pageing section
+            if (pageSize == null)
+            {
+
+                var cookies = System.Web.HttpContext.Current.Request.Cookies;
+                if (cookies["ItemCount"] == null)
+                {
+                    cookies.Set(new HttpCookie("ItemCount"));
+                }
+
+                if (int.TryParse(cookies["ItemCount"].Value, out int count))
+                {
+                    pageSize = count;
+                }
+                else
+                {
+                    pageSize = 3;
+                }
+            }
+
+            var responsecookies = System.Web.HttpContext.Current.Response.Cookies;
+
+            if (responsecookies["ItemCount"] == null)
+            {
+                responsecookies.Set(new HttpCookie("ItemCount"));
+            }
+
+            responsecookies["ItemCount"].Value = pageSize.ToString();
+
+            var pIndex = pageIndex ?? 1;
+            var pSize = int.Parse(System.Web.HttpContext.Current.Response.Cookies["ItemCount"].Value);
+
+            result = result.ToPagedList(pIndex, pSize);
+            
             PlantViewModel pvm = new PlantViewModel
             {
-                Areas = new SelectList(new List<string>()
+                Area = new SelectList(new List<string>()
                 {
-                    "Areas",
+                    "Area",
                     "Background",
                     "Midground",
                     "Foreground"
@@ -71,9 +108,15 @@ namespace AquaMarket.Controllers
                     "Demanding"
                 }),
 
+                PageInfo = new PageInfo{
+                    PageSize = pSize,
+                    PageNumber = pIndex
+                },
+
+                Plants = result
             };
 
-            return result;
+            return pvm;
         }
 
         public async Task <JsonResult>  Autocomplete(string term)
@@ -99,7 +142,8 @@ namespace AquaMarket.Controllers
         public async Task<Plant> Details(int? id)
         {
             db = new AquaDBContext();
-            Plant plant = await db.Plants.FirstOrDefaultAsync(t => t.Id == id);
+            
+            Plant plant = await db.Plants.Include(p => p.File).Include(p => p.PlantSpecies).FirstOrDefaultAsync(t => t.Id == id);
             return plant;
         }
 
@@ -132,7 +176,8 @@ namespace AquaMarket.Controllers
         public async Task<Plant> Edit(int? id)
         {
             db = new AquaDBContext();
-            Plant plant = await db.Plants.FirstOrDefaultAsync(t => t.Id == id);
+            Plant plant = await db.Plants.Include(p=>p.File).Include(p=>p.PlantSpecies).FirstOrDefaultAsync(t => t.Id == id);
+            plant.PlantSpecies.PlantFamily =  db.Families.FirstOrDefault(f=>f.Id == plant.PlantSpecies.FamilyId);
             return plant;
         }
 
@@ -157,9 +202,6 @@ namespace AquaMarket.Controllers
                     db.Files.Add(NewFile);
                     await db.SaveChangesAsync();
                 }
-            
-            
-
         }
 
         public bool CheckFileName(HttpPostedFileBase file)
@@ -209,6 +251,13 @@ namespace AquaMarket.Controllers
             db.Plants.Remove(plant);
             await db.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Species>> GetSpecies()
+        {
+            db = new AquaDBContext();
+            return await db.Species.ToListAsync();
+        }
+
 
         protected override void Dispose(bool disposing)
         {
