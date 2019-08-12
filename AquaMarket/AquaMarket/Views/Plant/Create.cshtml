@@ -35,7 +35,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.Location, ViewBag.Locations as SelectList, "Select location",  new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -45,7 +45,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Light, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Light, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.Light, ViewBag.LightRequirements as SelectList, "Select light requirements", new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Light, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -99,7 +99,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Usage, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Usage, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.Usage, ViewBag.PlantUsages as SelectList, "Select usage", new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Usage, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -117,7 +117,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.GrowthSpeed, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.GrowthSpeed, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.GrowthSpeed, ViewBag.GrowthSpeedValues as SelectList, "Select growth speed", new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.GrowthSpeed, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -125,7 +125,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Coloration, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Coloration, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.Coloration, ViewBag.Colorations as SelectList, "Select coloration", new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Coloration, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -133,23 +133,17 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Сomplexity, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Сomplexity, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.Сomplexity, ViewBag.PlantComplexity as SelectList, "Select complexity", new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Сomplexity, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Сomplexity, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Сomplexity, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Сomplexity, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    
 
     <div class="form-group">
         @Html.LabelFor(model => model.Area, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.Area, ViewBag.Areas as SelectList, "Select area", new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -167,16 +161,16 @@
     <div class="form-group">
         @Html.LabelFor(model => model.PlantType, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.PlantType, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.PlantType, ViewBag.Types as SelectList, "Select plant type", new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.PlantType, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.PlantSpecies.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.SpeciesId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.ListBoxFor(model => model.PlantSpecies.Name, ViewBag.PlantSpeciesNames as SelectList, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PlantSpecies.Name, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.SpeciesId, ViewBag.PlantSpeciesNames as SelectList, "Select species", new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SpeciesId, "", new { @class = "text-danger" })
         </div>
     </div>
 

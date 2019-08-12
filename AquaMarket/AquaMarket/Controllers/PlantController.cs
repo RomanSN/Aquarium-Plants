@@ -6,6 +6,7 @@ using System.Collections;
 using PagedList;
 using System.Web;
 using System.Collections.Generic;
+using System;
 
 namespace AquaMarket.Controllers
 {
@@ -60,7 +61,15 @@ namespace AquaMarket.Controllers
         {
             repo = new PlantRepo();
             IEnumerable<Species> species = await repo.GetSpecies();
-            ViewBag.PlantSpeciesNames = new SelectList(species);
+            ViewBag.PlantSpeciesNames = new SelectList(species,"id", "Name");
+            ViewBag.PlantUsages = new SelectList(Plant.PlantUsage);
+            ViewBag.LightRequirements = new SelectList(Plant.LightRequirements);
+            ViewBag.GrowthSpeedValues = new SelectList(Enum.GetValues(typeof(Plant.GrowthSpeedValues)));
+            ViewBag.Areas = new SelectList(Enum.GetValues(typeof(Plant.Areas)));
+            ViewBag.Locations = new SelectList(Enum.GetValues(typeof(Plant.Locations)));
+            ViewBag.PlantComplexity = new SelectList(Enum.GetValues(typeof(Plant.PlantComplexity)));
+            ViewBag.Types = new SelectList(Enum.GetValues(typeof(Plant.Types)));
+            ViewBag.Colorations = new SelectList(Enum.GetValues(typeof(Plant.Colorations)));
             return View();
         }
 
@@ -69,8 +78,7 @@ namespace AquaMarket.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "PlantName,Description,Light,MinTemp,MaxTemp,MinPh,MaxPh,MinGh,MaxGh," +
-                                "GrowthSpeed,Hight,Coloration,Area,Location,Usage,Сomplexity,OriginCountry,Type,PlantSpecies,Image")] Plant plant)
+        public async Task<ActionResult> Create(Plant plant)
         {
             repo = new PlantRepo();
             if (ModelState.IsValid)
