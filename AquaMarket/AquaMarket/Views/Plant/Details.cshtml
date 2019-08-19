@@ -5,192 +5,188 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div id="details" class="partial_Lable partial_content">
 
-<div>
-    <h4>Plant</h4>
+    <h2>Details</h2>
     <hr />
-    <dl class="dl-horizontal">
-        <!--taxonomy-->
+    
+        <div class="row container-fluid">
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <!--taxonomy-->
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PlantName)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PlantName)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PlantName)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.PlantName)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PlantSpecies.PlantFamily.FamilyName)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PlantSpecies.PlantFamily.Name)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PlantSpecies.PlantFamily.FamilyName)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.PlantSpecies.PlantFamily.Name)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PlantSpecies.SpeciesName)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PlantSpecies.Name)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PlantSpecies.SpeciesName)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.PlantSpecies.Name)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.OriginCountry)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.OriginCountry)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.OriginCountry)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.OriginCountry)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PlantType)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PlantType)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PlantType)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.PlantType)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                    <!--characteristics-->
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Hight)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Hight)
+                    </dd>
 
-        <!--characteristics-->
-        <dt>
-            @Html.DisplayNameFor(model => model.Hight)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.GrowthSpeed)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Hight)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.GrowthSpeed)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GrowthSpeed)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Coloration)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.GrowthSpeed)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Coloration)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Coloration)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Сomplexity)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Coloration)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Сomplexity)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Сomplexity)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Location)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Сomplexity)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Location)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Area)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Area)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Area)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Usage)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Area)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Usage)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Usage)
-        </dt>
+                    <!--environment-->
 
-        <dd>
-            @Html.DisplayFor(model => model.Usage)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Light)
+                    </dt>
 
-        <!--environment-->
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Light)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Light)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Light)
+                    </dd>
 
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MinTemp)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MinTemp)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MinTemp)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.MinTemp)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxTemp)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MaxTemp)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MaxTemp)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.MaxTemp)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MinPh)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MinPh)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MinPh)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.MinPh)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxPh)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MaxPh)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MaxPh)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.MaxPh)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MinGh)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MinGh)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MinGh)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.MinGh)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxGh)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MaxGh)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MaxGh)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.MaxGh)
+                    </dd>
 
+                </dl>
 
-        <dt>
-            Image
-        </dt>
-        <dd>
-         
-             <img src="@Url.Content("~/Files/" + Model.File.FileName)" width="70" height="100" alt="Plant image">
-                    
-        </dd>
-
-    </dl>
+            </div>
+            <div class="col-md-8 description">
+                @if (Model.File != null)
+                {
+                    <img src="@Url.Content("~/Files/" + Model.File.FileName)" width="300" alt="Plant image">
+                }
+                <p>
+                    @Model.Description
+                </p>
+            </div>
+        </div>
+    <div>
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" }) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" }) |
+        @Html.ActionLink("Back to catalogue", null, null, new { @class = "btn btn-info", href = Request.UrlReferrer })
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" }) |
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary" }) |
-    @Html.ActionLink("Back to List", "Index", new { @class = "btn" })
-</p>

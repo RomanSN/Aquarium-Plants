@@ -17,11 +17,9 @@ namespace AquaMarket.Models
 
         public int Id { get; set; }
         [Required]
-        public string PlantName { get; set; }   
+        public string PlantName { get; set; } 
         [Required]
         public string Description { get; set; }
-        
-
 
         //environment
         [Required]
@@ -47,9 +45,8 @@ namespace AquaMarket.Models
         [UIHint("NullableMaxGhTemplate")]
         [Range(typeof(decimal), "1,0", "30,0", ErrorMessage = "Min value is 1, max value is 15. Double separator is ','")]
         public decimal? MaxGh { get; set; }
+
         
-
-
         //characteristics
         [Required]
         public int? Hight { get; set; }
@@ -80,7 +77,7 @@ namespace AquaMarket.Models
         
         [Required]
         public int? SpeciesId { get; set; }
-        //[Required]
+        
         public virtual Species PlantSpecies { get; set; }
 
         //resources
@@ -95,7 +92,7 @@ namespace AquaMarket.Models
 
         public Plant()
         {
-            File = new File();
+            
         }
 
         

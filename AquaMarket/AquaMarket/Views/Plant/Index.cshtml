@@ -12,7 +12,7 @@
 @Scripts.Render("~/bundles/bootstrap")
 @Styles.Render("~/Content/css")
 
-<div id="Catalogue" class="partial_Lable">
+<div id="catalogue" class="partial_Lable">
     <div id="catalogue_header" class="container-fluid">
 
         <h2>Plant catalogue from A to Z</h2>
@@ -39,6 +39,7 @@
             </div>
 
             <div class="col-md-4 create_section">
+                <!--A button created by html-->
                 <div id="create_new">
                     <a href="/Plant/Create" class="btn btn-info" role="button">Add plant</a>
                 </div>
@@ -50,14 +51,21 @@
     @foreach (var item in Model.Plants)
     {
         <div class="row plantItem container-fluid">
-            <div class="col-md-4 plantitem_caption">
+            <div class="col-md-4 container plantitem_caption">
                 <div>
                     <h4>@item.PlantName</h4>
                 </div>
+                @if (item.File != null)
+                {
+                    <div>
+                        <a href="@Url.Content("~/Files/" + item.File.FileName)">
+                            <img src="@Url.Content("~/Files/" + item.File.FileName)" alt="Plant image">
+                        </a>
+                    </div>
+                }
                 <div>
-                    <a href="@Url.Content("~/Files/" + item.File.FileName)">
-                        <img src="@Url.Content("~/Files/" + item.File.FileName)" alt="Plant image">
-                    </a>
+                    <!--A button created by html helper-->
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info", role = "button" })
                 </div>
             </div>
 
@@ -114,9 +122,7 @@
                 </div>
             </div>
 
-            <div>
-                @Html.ActionLink("Details", "Details", new { id = item.Id },new {@class= "btn btn-default" })
-            </div>
+            
         </div>
     }
 </div>

@@ -192,11 +192,13 @@ ul {
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
-textarea {
+select{
     max-width: 280px;
 }
-
+textarea {
+    max-width: 400px;
+    
+}
 
 .vcenter {
     display: inline-block;
@@ -416,22 +418,49 @@ textarea {
 }
 
                                 /*Partial pages*/
-/*Contact page*/
+select{
+    padding:7px;
+}
 
+input[type=file]{
+    padding-top:5px;
+}
+
+.control-label{
+    padding-right:5px;
+}
+
+.partial_content {
+    margin: 7px;
+    border: 1px solid black;
+    background-color: honeydew;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.partial_content h2 {
+    text-align: center;
+}
+
+.partial_content .btn[type="submit"] {
+    margin-left: 25px;
+}
+    /*Contact page*/
 #contact {
     font-size: 1.7rem;
-    color: #D5D5D5;
 }
-#contact h2 {
-    text-align:center;
+#contact a {
+    color: #2D7458;
+    font-style:italic;
 }
 
-/*Catalogue header*/
 
-#Catalogue {
+/*Catalogue page (index)*/
+
+#catalogue {
     margin:7px;
 }
-#Catalogue h2 {
+#catalogue h2 {
     text-align: center;
 }
 #catalogue_header {
@@ -480,16 +509,17 @@ textarea {
 }
 /*Plant items*/
 .plantItem {
-    border: solid;
-    border-color: black;
-    border-width: 1px;
+    border:1px solid black;
     border-radius: 5px;
     margin-top: 10px !important;
     background-color: honeydew;
     padding:10px;
 }
-.plantitem_caption a{
-    color: darkgray;
+.plantItem img {
+    max-width: 97%;
+    height: auto;
+    margin-bottom: 10px;
+    margin-top:20px;
 }
 
 .characteristics_table {
@@ -508,4 +538,21 @@ textarea {
     padding: 2px !important;
     text-align: center;
     background-color: #E4FFFB;
+    border-bottom: 1px solid black !important;
 }
+ /*Details page*/
+
+.description {
+    display: flex;
+    flex-direction: column;
+}
+.description img{
+    align-self:center;
+    margin-bottom:10px;
+}
+
+/*Add new plant page*/
+
+
+
+

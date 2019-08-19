@@ -30,7 +30,7 @@ namespace AquaMarket.Controllers
             return  await repo.Autocomplete(term);
         }
 
-        // GET: Plant
+        // GET: Plants
         public async Task<ActionResult> Index(string area, string light, string complexity, int? t, decimal? ph, decimal? gh,
              int? pageIndex, int? pageSize)
         {
@@ -78,7 +78,8 @@ namespace AquaMarket.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Plant plant)
+        public async Task<ActionResult> Create([Bind(Include = "PlantName, Description, Light, MinTemp, MaxTemp, MinPh, MaxPh, MinGh, MaxGh, Hight, GrowthSpeed, " +
+            "Coloration, Area, Location, Usage, Сomplexity, OriginCountry, PlantType, SpeciesId, Image")] Plant plant)
         {
             repo = new PlantRepo();
             if (ModelState.IsValid)
@@ -86,9 +87,20 @@ namespace AquaMarket.Controllers
                 await repo.Create(plant);
                 return RedirectToAction("Index");
             }
-
+            IEnumerable<Species> species = await repo.GetSpecies();
+            ViewBag.PlantSpeciesNames = new SelectList(species, "id", "Name", plant.SpeciesId);
+            ViewBag.PlantUsages = new SelectList(Plant.PlantUsage, plant.Usage);
+            ViewBag.LightRequirements = new SelectList(Plant.LightRequirements, plant.Light);
+            ViewBag.GrowthSpeedValues = new SelectList(Enum.GetValues(typeof(Plant.GrowthSpeedValues)), plant.GrowthSpeed);
+            ViewBag.Areas = new SelectList(Enum.GetValues(typeof(Plant.Areas)),plant.Area);
+            ViewBag.Locations = new SelectList(Enum.GetValues(typeof(Plant.Locations)), plant.Location);
+            ViewBag.PlantComplexity = new SelectList(Enum.GetValues(typeof(Plant.PlantComplexity)), plant.Сomplexity);
+            ViewBag.Types = new SelectList(Enum.GetValues(typeof(Plant.Types)), plant.PlantType);
+            ViewBag.Colorations = new SelectList(Enum.GetValues(typeof(Plant.Colorations)), plant.Coloration);
             return View(plant);
         }
+
+
 
         // GET: Plants/Edit/5
         [HttpGet]
@@ -104,6 +116,16 @@ namespace AquaMarket.Controllers
             {
                 return HttpNotFound();
             }
+            IEnumerable<Species> species = await repo.GetSpecies();
+            ViewBag.PlantSpeciesNames = new SelectList(species, "id", "Name");
+            ViewBag.PlantUsages = new SelectList(Plant.PlantUsage);
+            ViewBag.LightRequirements = new SelectList(Plant.LightRequirements);
+            ViewBag.GrowthSpeedValues = new SelectList(Enum.GetValues(typeof(Plant.GrowthSpeedValues)));
+            ViewBag.Areas = new SelectList(Enum.GetValues(typeof(Plant.Areas)));
+            ViewBag.Locations = new SelectList(Enum.GetValues(typeof(Plant.Locations)));
+            ViewBag.PlantComplexity = new SelectList(Enum.GetValues(typeof(Plant.PlantComplexity)));
+            ViewBag.Types = new SelectList(Enum.GetValues(typeof(Plant.Types)));
+            ViewBag.Colorations = new SelectList(Enum.GetValues(typeof(Plant.Colorations)));
             return View(plant);
         }
 
@@ -112,21 +134,31 @@ namespace AquaMarket.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit( Plant plant)
+        public async Task<ActionResult> Edit([Bind(Include = "PlantName, Description, Light, MinTemp, MaxTemp, MinPh, MaxPh, MinGh, MaxGh, Hight, GrowthSpeed, " +
+            "Coloration, Area, Location, Usage, Сomplexity, OriginCountry, PlantType, SpeciesId, Image")] Plant plant)
         {
             repo = new PlantRepo();
-            Plant plantDB = await repo.Edit(plant.Id);
-            plant.FileId = plantDB.FileId;
-            
             
             if (ModelState.IsValid)
             {
                 await repo.Edit(plant);
                 return RedirectToAction("Index");
             }
+            Plant plantDB = await repo.Edit(plant.Id);
+            plant.FileId = plantDB.FileId;
             plant.File = plantDB.File;
+            IEnumerable<Species> species = await repo.GetSpecies();
+            ViewBag.PlantSpeciesNames = new SelectList(species, "id", "Name");
+            ViewBag.PlantUsages = new SelectList(Plant.PlantUsage);
+            ViewBag.LightRequirements = new SelectList(Plant.LightRequirements);
+            ViewBag.GrowthSpeedValues = new SelectList(Enum.GetValues(typeof(Plant.GrowthSpeedValues)));
+            ViewBag.Areas = new SelectList(Enum.GetValues(typeof(Plant.Areas)));
+            ViewBag.Locations = new SelectList(Enum.GetValues(typeof(Plant.Locations)));
+            ViewBag.PlantComplexity = new SelectList(Enum.GetValues(typeof(Plant.PlantComplexity)));
+            ViewBag.Types = new SelectList(Enum.GetValues(typeof(Plant.Types)));
+            ViewBag.Colorations = new SelectList(Enum.GetValues(typeof(Plant.Colorations)));
 
-            return View(plant);//RedirectToAction("Edit", new { id =plant.Id });
+            return View(plant);
         }
        
        
@@ -179,6 +211,8 @@ namespace AquaMarket.Controllers
             await repo.DeleteConfirmed(id);
             return RedirectToAction("Index");
         }
+
+       
     }
 }
 

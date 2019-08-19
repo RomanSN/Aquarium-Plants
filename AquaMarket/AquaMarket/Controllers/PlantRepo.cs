@@ -150,11 +150,10 @@ namespace AquaMarket.Controllers
         public async Task Create(Plant plant)
         {
             db = new AquaDBContext();
-            db.Plants.Add(plant);
-            await db.SaveChangesAsync();
+            
 
-            ICollection<Plant> allplants = await db.Plants.ToListAsync();
-            Plant created = allplants.Last();
+            //ICollection<Plant> allplants = await db.Plants.ToListAsync();
+            //Plant created = allplants.Last();
             
                 if (plant.Image != null)
                 {
@@ -164,13 +163,17 @@ namespace AquaMarket.Controllers
                     File NewFile = new File
                     {
                         FileName = fileName,
-                        FileType = System.IO.Path.GetExtension(created.Image.FileName),
-                        PlantId = created.Id
+                        FileType = System.IO.Path.GetExtension(plant.Image.FileName),
+                        //PlantId = created.Id
                     };
                     db.Files.Add(NewFile);
                     await db.SaveChangesAsync();
                 }
-            
+            ICollection<File> allfiless = await db.Files.ToListAsync();
+            File created = allfiless.Last();
+            plant.FileId = created.Id;
+            db.Plants.Add(plant);
+            await db.SaveChangesAsync();
         }
 
         public async Task<Plant> Edit(int? id)
