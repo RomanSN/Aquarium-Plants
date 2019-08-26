@@ -2,13 +2,11 @@
 
 $('document').ready(function () {
 
+    $('#delete_plant_btn').click(function () {
+        confirm('Are you sure you want to delete this item?');
+    });
 
     $('html, body').animate({ scrollTop: $('.partial_Lable').offset().top - 230 }, 1000);
-
-});
-
-$('document').ready(function () {
-   
 
     $('#search').autocomplete({
         
@@ -39,5 +37,6 @@ $('document').ready(function () {
         
     });
 
-
 });
+
+

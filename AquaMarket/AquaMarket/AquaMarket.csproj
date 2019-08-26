@@ -355,6 +355,8 @@
     <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate-files.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.custom\package.json" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -399,7 +401,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Plant\Create.cshtml" />
-    <Content Include="Views\Plant\Delete.cshtml" />
     <Content Include="Views\Plant\Details.cshtml" />
     <Content Include="Views\Plant\Edit.cshtml" />
     <Content Include="Views\Plant\Index.cshtml" />
@@ -413,7 +414,8 @@
     <Content Include="Views\Shared\EditorTemplates\NullableMaxPhTemplate.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\NullableMaxGhTemplate.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\NullableMinPhTemplate.cshtml" />
-    <Content Include="Views\Plant\DeleteFile.cshtml" />
+    <Content Include="Views\Plant\DeleteFileConfirmed.cshtml" />
+    <Content Include="Views\Plant\Calculator.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

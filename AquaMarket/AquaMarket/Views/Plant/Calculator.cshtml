@@ -1,0 +1,57 @@
+﻿@using System.Collections.Generic
+@model AquaMarket.Models.PlantViewModel
+
+@{
+    ViewBag.Title = "Calculator";
+}
+
+<div id="calculator_page" class="partial_Lable partial_content">
+
+    <h2>Calculator</h2>
+    <hr />
+
+    @using (Html.BeginForm("SelectedPlants", "Plant", FormMethod.Post, new {temp = Model.Temp, ph = Model.Ph, gh= Model.Gh}))
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+
+        <div class="form-inline">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <!--environment-->
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Temp, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Temp, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Temp, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ph, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Ph, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Ph, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+           
+            <div class="form-group">
+                @Html.LabelFor(model => model.Gh, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Gh, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Gh, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-success" /> |
+
+                @Html.ActionLink("Back", null, null, new { @class = "btn btn-default", role = "button", href = Request.UrlReferrer })
+            </div>
+        </div>
+    }
+</div>

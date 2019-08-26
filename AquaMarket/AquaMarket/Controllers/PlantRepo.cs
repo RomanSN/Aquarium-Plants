@@ -48,6 +48,8 @@ namespace AquaMarket.Controllers
             }
 
             //pageing section
+
+
             if (pageSize == null)
             {
 
@@ -76,38 +78,21 @@ namespace AquaMarket.Controllers
 
             responsecookies["ItemCount"].Value = pageSize.ToString();
 
+            if (responsecookies["PageIndex"] == null)
+            {
+                responsecookies.Set(new HttpCookie("PageIndex"));
+            }
+
             var pIndex = pageIndex ?? 1;
+
+            responsecookies["PageIndex"].Value = pIndex.ToString();
+
             var pSize = int.Parse(System.Web.HttpContext.Current.Response.Cookies["ItemCount"].Value);
 
             result = result.ToPagedList(pIndex, pSize);
             
             PlantViewModel pvm = new PlantViewModel
             {
-                Area = new SelectList(new List<string>()
-                {
-                    "Area",
-                    "Background",
-                    "Midground",
-                    "Foreground"
-                }),
-
-                Light = new SelectList(new List<string>()
-                {
-                    "Light",
-                    "Shady",
-                    "Shady to semi-shady",
-                    "Semi-shady to sunny",
-                    "Sunny"
-                }),
-
-                Complexity = new SelectList(new List<string>()
-                {
-                    "Complexity",
-                    "Easy",
-                    "Average",
-                    "Demanding"
-                }),
-
                 PageInfo = new PageInfo{
                     PageSize = pSize,
                     PageNumber = pIndex
@@ -118,6 +103,8 @@ namespace AquaMarket.Controllers
 
             return pvm;
         }
+
+        
 
         public async Task <JsonResult>  Autocomplete(string term)
         {
@@ -150,12 +137,13 @@ namespace AquaMarket.Controllers
         public async Task Create(Plant plant)
         {
             db = new AquaDBContext();
-            
+            db.Plants.Add(plant);
+            await db.SaveChangesAsync();
 
-            //ICollection<Plant> allplants = await db.Plants.ToListAsync();
-            //Plant created = allplants.Last();
-            
-                if (plant.Image != null)
+            ICollection<Plant> allplants = await db.Plants.ToListAsync();
+            Plant createdplant = allplants.Last();
+
+            if (plant.Image != null)
                 {
                     string fileName = System.IO.Path.GetFileName(plant.Image.FileName);
                     string path = System.Web.HttpContext.Current.Server.MapPath("~/Files/" + fileName);
@@ -164,16 +152,17 @@ namespace AquaMarket.Controllers
                     {
                         FileName = fileName,
                         FileType = System.IO.Path.GetExtension(plant.Image.FileName),
-                        //PlantId = created.Id
+                        PlantId = createdplant.Id
                     };
                     db.Files.Add(NewFile);
                     await db.SaveChangesAsync();
                 }
-            ICollection<File> allfiless = await db.Files.ToListAsync();
-            File created = allfiless.Last();
-            plant.FileId = created.Id;
-            db.Plants.Add(plant);
+            ICollection<File> allfiles = await db.Files.ToListAsync();
+            File createdfile = allfiles.Last();
+            createdplant.FileId = createdfile.Id;
+            db.Entry(createdplant).State = EntityState.Modified;
             await db.SaveChangesAsync();
+
         }
 
         public async Task<Plant> Edit(int? id)
@@ -187,13 +176,10 @@ namespace AquaMarket.Controllers
         public async Task Edit(Plant plant)
         {
             db = new AquaDBContext();
-            db.Entry(plant).State = EntityState.Modified;
-            await db.SaveChangesAsync();
-
            
                 if (plant.Image != null)
                 {
-                    string fileName = System.IO.Path.GetFileName(plant.Image.FileName) + DateTime.Now.ToString();
+                    string fileName = System.IO.Path.GetFileNameWithoutExtension(plant.Image.FileName)+ DateTime.Now.Millisecond.ToString()+ System.IO.Path.GetExtension(plant.Image.FileName);
                     string path = System.Web.HttpContext.Current.Server.MapPath("~/Files/" + fileName);
                     plant.Image.SaveAs(path);
                     File NewFile = new File
@@ -204,7 +190,13 @@ namespace AquaMarket.Controllers
                     };
                     db.Files.Add(NewFile);
                     await db.SaveChangesAsync();
+                    ICollection<File> allfiless = await db.Files.ToListAsync();
+                    File created = allfiless.Last();
+                    plant.FileId = created.Id;
                 }
+              
+            db.Entry(plant).State = EntityState.Modified;
+            await db.SaveChangesAsync();
         }
 
         public bool CheckFileName(HttpPostedFileBase file)
@@ -218,15 +210,7 @@ namespace AquaMarket.Controllers
             }
             return fileNames.Contains(System.IO.Path.GetFileName(file.FileName));
         }
-
-
-        public async Task<File> DeleteFile(int? id)
-        {
-            db = new AquaDBContext();
-            File file = await db.Files.FindAsync(id);
-            return file;
-        }
-
+        
         public async Task DeleteFileConfirmed(int id)
         {
             db = new AquaDBContext();
@@ -238,13 +222,6 @@ namespace AquaMarket.Controllers
             {
                 System.IO.File.Delete(path);
             }
-        }
-
-        public async Task<Plant> Delete(int? id)
-        {
-            db = new AquaDBContext();
-            Plant plant = await db.Plants.FindAsync(id);
-            return plant;
         }
 
         public async Task DeleteConfirmed(int id)
@@ -261,6 +238,12 @@ namespace AquaMarket.Controllers
             return await db.Species.ToListAsync();
         }
 
+        internal async Task<Plant> getCreatedPlant()
+        {
+            db = new AquaDBContext();
+            ICollection<Plant> plants = await db.Plants.ToListAsync();
+            return plants.Last();
+        }
 
         protected override void Dispose(bool disposing)
         {

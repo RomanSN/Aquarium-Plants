@@ -9,7 +9,7 @@ namespace AquaMarket
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js", "~/Scripts/jquery.js", "~/Scripts/jquery-ui.*", "~/Scripts/custom.js"));
+                        "~/Scripts/jquery-{version}.js", "~/Scripts/jquery.js", "~/Scripts/jquery-ui.*", "~/Scripts/jquery.unobtrusive*", "~/Scripts/custom.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

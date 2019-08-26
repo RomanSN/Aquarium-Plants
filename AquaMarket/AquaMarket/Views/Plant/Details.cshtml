@@ -185,8 +185,10 @@
             </div>
         </div>
     <div>
-        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" }) |
+       
+
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger", id = "delete_plant_btn"}) |
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" }) |
-        @Html.ActionLink("Back to catalogue", null, null, new { @class = "btn btn-info", href = Request.UrlReferrer })
+        @Html.ActionLink("Catalogue", "Index", new { pageIndex = int.Parse(System.Web.HttpContext.Current.Request.Cookies["PageIndex"].Value) }, new { @class = "btn btn-info"})
     </div>
 </div>

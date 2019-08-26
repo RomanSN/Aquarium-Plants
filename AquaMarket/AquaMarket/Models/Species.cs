@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace AquaMarket.Models
 {
     public class Species
     {
-        [Display(Name ="Species Id")]
-        public int Id { get; set; }  
-
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
+        [Display(Name = "Species")]
         public string Name { get; set; }
 
         public string Description { get; set; }

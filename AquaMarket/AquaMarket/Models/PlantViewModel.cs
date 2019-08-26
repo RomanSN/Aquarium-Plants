@@ -10,11 +10,29 @@ namespace AquaMarket.Models
     {
         public IEnumerable<Plant> Plants { get; set; }
 
-        public SelectList Area { get; set; }
-        public SelectList Light { get; set; }
-        public SelectList Complexity { get; set; }
-        
+        Plant Plant { get; set; }
+
+        public int? Temp { get; set; }
+        public decimal? Ph { get; set; }
+        public decimal? Gh { get; set; }
+
+        public string Area { get; set; }
+        public string Light { get; set; }
+        public string Complexity { get; set; }
+
+        public SelectList Areas { get; set; }
+        public SelectList LightRequirements { get; set; }
+        public SelectList ComplexityValues { get; set; }
+
         public PageInfo PageInfo { get; set; }
+
+        public PlantViewModel()
+        {
+            Plant = new Plant();
+            Areas = Plant.Areas;
+            LightRequirements = Plant.LightRequirements;
+            ComplexityValues = Plant.PlantComplexityValues;
+        }
 
     }
 

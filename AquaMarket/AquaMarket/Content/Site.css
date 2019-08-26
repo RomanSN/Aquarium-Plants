@@ -141,11 +141,10 @@ Extra (xl) large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) { ... }
 */
 
-
  /* Common section */
 body {
     padding-bottom: 20px;
-    background-image: url(~/../../Images/water4.jpg);
+    background-image: linear-gradient(to bottom right, green, red); /*url(~/../../Images/water4.jpg);*/
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -182,6 +181,10 @@ ul {
 .fa {
     font-size:2em;
 }
+select {
+    border-radius:4px;
+}
+
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -441,7 +444,10 @@ input[type=file]{
 .partial_content h2 {
     text-align: center;
 }
-
+.partial_content hr {
+    text-align: center;
+    border-color: lightgray;
+}
 .partial_content .btn[type="submit"] {
     margin-left: 25px;
 }
@@ -467,8 +473,8 @@ input[type=file]{
     background-color: #72DDC7;
     border-radius: 6px;
 }
-#catalogue_header hr{
-   margin-bottom:0px;
+#catalogue_header hr {
+    margin-bottom: 0px;
 }
 .pagesizer_sections {
     display: flex;

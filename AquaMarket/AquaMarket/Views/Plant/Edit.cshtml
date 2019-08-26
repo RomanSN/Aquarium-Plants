@@ -18,10 +18,10 @@
     <div class="form-horizontal">
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.SpeciesId)
         @Html.HiddenFor(model => model.FileId)
-
 
         <!--taxonomy-->
 
@@ -36,14 +36,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PlantType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.PlantType, ViewBag.Types as SelectList, Model.PlantType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.PlantType, Model.Types as SelectList, Model.PlantType, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PlantType, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.SpeciesId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.SpeciesId, ViewBag.PlantSpeciesNames as SelectList, "Select species", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.SpeciesId, ViewBag.PlantSpeciesNames as SelectList, Model.PlantSpecies.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SpeciesId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -60,7 +60,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Light, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Light, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Light, Model.LightRequirements as SelectList, Model.Light, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Light, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -126,7 +126,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.GrowthSpeed, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.GrowthSpeed, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.GrowthSpeed, Model.GrowthSpeedValues as SelectList, Model.GrowthSpeed, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.GrowthSpeed, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -134,7 +134,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Coloration, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Coloration, ViewBag.Colorations as SelectList, Model.Coloration, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Coloration, Model.Colorations as SelectList, Model.Coloration, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Coloration, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -142,7 +142,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Location, ViewBag.Locations as SelectList, Model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Location, Model.Locations as SelectList, Model.Location, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -150,7 +150,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Area, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Area, ViewBag.Areas as SelectList, Model.Area, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Area, Model.Areas as SelectList, Model.Area, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -158,7 +158,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Usage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Usage, ViewBag.PlantUsages as SelectList, Model.Usage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Usage, Model.PlantUsages as SelectList, Model.Usage, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Usage, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -166,26 +166,29 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Сomplexity, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Сomplexity, ViewBag.PlantComplexity as SelectList, Model.Сomplexity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Сomplexity, Model.PlantComplexityValues as SelectList, Model.Сomplexity, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Сomplexity, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Description, new { rows = 5, cols = 40 })
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" , rows = 7, cols = 60 })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
+
+        <div id="file" class="form-group">
             @if (Model.File != null)
             {
                 @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <a href="@Url.Content("~/Files/" + Model.File.FileName)"></a>
-                    <img src="@Url.Content("~/Files/" + Model.File.FileName)" width="200" alt="Plant image">
-                    @Html.ActionLink("Delete image", "DeleteFile", new { FileId = Model.File.Id }, new { @class = "btn btn-danger" }) <br />
-                </div>
+            <div  class="col-md-10">
+                
+                <a href="@Url.Content("~/Files/" + Model.File.FileName)"></a>
+                <img src="@Url.Content("~/Files/" + Model.File.FileName)" width="200" alt="Plant image">
+                @Ajax.ActionLink("Change image", "DeleteFileConfirmed", new { fileId = Model.File.Id }, new AjaxOptions { UpdateTargetId = "file", Confirm = "This image will be deleted, continue?"}, new { @class = "btn btn-danger" })
+
+            </div>
             }
             else
             {
