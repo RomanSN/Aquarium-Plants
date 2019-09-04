@@ -193,6 +193,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\CustomMetadataProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\ArticlesRepo.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlantRepo.cs" />
@@ -224,6 +226,12 @@
     <Compile Include="Migrations\201907301225546_MigrateDB8.Designer.cs">
       <DependentUpon>201907301225546_MigrateDB8.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909042146161_MigrateDB9.cs" />
+    <Compile Include="Migrations\201909042146161_MigrateDB9.Designer.cs">
+      <DependentUpon>201909042146161_MigrateDB9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\ArticleViewModel.cs" />
     <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Models\Family.cs" />
     <Compile Include="Models\PlantViewModel.cs" />
@@ -416,6 +424,12 @@
     <Content Include="Views\Shared\EditorTemplates\NullableMinPhTemplate.cshtml" />
     <Content Include="Views\Plant\DeleteFileConfirmed.cshtml" />
     <Content Include="Views\Plant\Calculator.cshtml" />
+    <Content Include="Views\Plant\SelectedPlants.cshtml" />
+    <Content Include="Views\Articles\Create.cshtml" />
+    <Content Include="Views\Articles\Delete.cshtml" />
+    <Content Include="Views\Articles\Details.cshtml" />
+    <Content Include="Views\Articles\Edit.cshtml" />
+    <Content Include="Views\Articles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
@@ -481,6 +495,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907301225546_MigrateDB8.resx">
       <DependentUpon>201907301225546_MigrateDB8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909042146161_MigrateDB9.resx">
+      <DependentUpon>201909042146161_MigrateDB9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

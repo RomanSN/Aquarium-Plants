@@ -186,7 +186,7 @@
         </div>
     <div>
        
-
+        <!--Created with jquery confirmation for demonstration Ajax.ActionLink alternative-->
         @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger", id = "delete_plant_btn"}) |
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" }) |
         @Html.ActionLink("Catalogue", "Index", new { pageIndex = int.Parse(System.Web.HttpContext.Current.Request.Cookies["PageIndex"].Value) }, new { @class = "btn btn-info"})

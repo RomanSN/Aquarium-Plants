@@ -16,6 +16,7 @@ namespace AquaMarket.Models
         public DbSet<File> Files { get; set; }
         public DbSet<Family> Families { get; set; }
         public DbSet<Species> Species { get; set; }
+        public DbSet<Article> Articles { get; set; }
 
     }
 

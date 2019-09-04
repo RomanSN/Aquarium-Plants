@@ -186,6 +186,8 @@ select {
 }
 
 
+
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -222,7 +224,6 @@ textarea {
 }
 
 /*Login section*/
-
 #login_login {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -268,9 +269,11 @@ textarea {
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+#search {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
 /*Site sections links*/
-
 #sections a {
     display: flex;
     flex-direction: column;
@@ -441,7 +444,7 @@ input[type=file]{
     padding: 10px;
 }
 
-.partial_content h2 {
+.partial_content h2,h4 {
     text-align: center;
 }
 .partial_content hr {
@@ -559,6 +562,27 @@ input[type=file]{
 
 /*Add new plant page*/
 
+/*Calculator page*/
 
+/*Selected plants page*/
 
-
+.filter_item{
+    display:inline-flex;
+}
+.filter_block{
+    display:flex;
+    flex-direction:column;
+    text-align:center;
+    align-items:center;
+}
+#catalogue_header_filter .row {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.filter_item input{
+    margin-left:5px;
+}
+.submit_centered {
+    display:flex;
+    align-items:center;
+}

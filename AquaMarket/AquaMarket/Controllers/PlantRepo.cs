@@ -15,36 +15,44 @@ namespace AquaMarket.Controllers
         private AquaDBContext db;
 
         //[HttpGet]
-        public async Task<PlantViewModel> getAllPlants(string area, string light,
-             string complexity, int? t, decimal? ph, decimal? gh, int? pageIndex, int? pageSize)
+        //public async Task<PlantViewModel> GetAllPlants(string area, string light,
+        //     string complexity, int? t, decimal? ph, decimal? gh, int? pageIndex, int? pageSize)
+        public async Task<PlantViewModel> GetAllPlants(PlantViewModel viewModel, int? pageIndex, int? pageSize)
         {
            
             db = new AquaDBContext();
+            PlantViewModel pvm = new PlantViewModel();
             IEnumerable<Plant> result = await db.Plants.Include(p => p.File).Include(p => p.PlantSpecies).ToListAsync();
 
-            if (area != null && !area.Equals("Area"))
+            if (viewModel.Area!= null && !viewModel.Area.Equals("Area"))
             {
-                result = result.Where(p => p.Area == area);
+                result = result.Where(p => p.Area == viewModel.Area).ToList();
+                pvm.Area = viewModel.Area;
             }
-            if (light != null && !light.Equals("Lighting"))
+            if (viewModel.Light != null && !viewModel.Light.Equals("Lighting"))
             {
-                result = result.Where(p => p.Light == light);
+                result = result.Where(p => p.Light == viewModel.Light).ToList();
+                pvm.Light = viewModel.Light;
             }
-            if (complexity != null && !complexity.Equals("Complexity"))
+            if (viewModel.Complexity != null && !viewModel.Complexity.Equals("Complexity"))
             {
-                result = result.Where(p => p.Сomplexity == complexity);
+                result = result.Where(p => p.Сomplexity == viewModel.Complexity).ToList();
+                pvm.Complexity = viewModel.Complexity;
             }
-            if (t!=null)
+            if (viewModel.Temp!=null)
             {
-                result = result.Where(p => t >= p.MinTemp && t<= p.MaxTemp);
+                result = result.Where(p =>p.MinTemp <= viewModel.Temp && p.MaxTemp>= viewModel.Temp).ToList();
+                pvm.Temp = viewModel.Temp;
             }
-            if (ph != null)
+            if (viewModel.Ph != null)
             {
-                result = result.Where(p => t >= p.MinPh && t <= p.MaxPh);
+                result = result.Where(p =>p.MinPh <= viewModel.Ph &&  p.MaxPh >= viewModel.Ph).ToList();
+                pvm.Ph = viewModel.Ph;
             }
-            if (gh != null)
+            if (viewModel.Gh != null)
             {
-                result = result.Where(p => t >= p.MinGh && t <= p.MaxGh);
+                result = result.Where(p => p.MinGh <= viewModel.Gh && p.MaxGh >= viewModel.Gh).ToList();
+                pvm.Gh = viewModel.Gh;
             }
 
             //pageing section
@@ -90,21 +98,16 @@ namespace AquaMarket.Controllers
             var pSize = int.Parse(System.Web.HttpContext.Current.Response.Cookies["ItemCount"].Value);
 
             result = result.ToPagedList(pIndex, pSize);
-            
-            PlantViewModel pvm = new PlantViewModel
-            {
-                PageInfo = new PageInfo{
-                    PageSize = pSize,
-                    PageNumber = pIndex
-                },
 
-                Plants = result
+            pvm.PageInfo = new PageInfo()
+            {
+                PageSize = pSize,
+                PageNumber = pIndex
             };
+            pvm.Plants = result;
 
             return pvm;
         }
-
-        
 
         public async Task <JsonResult>  Autocomplete(string term)
         {
@@ -238,7 +241,7 @@ namespace AquaMarket.Controllers
             return await db.Species.ToListAsync();
         }
 
-        internal async Task<Plant> getCreatedPlant()
+        internal async Task<Plant> GetCreatedPlant()
         {
             db = new AquaDBContext();
             ICollection<Plant> plants = await db.Plants.ToListAsync();

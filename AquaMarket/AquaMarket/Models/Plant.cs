@@ -32,18 +32,18 @@ namespace AquaMarket.Models
         public int? MaxTemp { get; set; }
         [Required]
         //[UIHint("NullableMinPhTemplate")]
-        [Range(typeof(decimal), "1.0", "15.0", ErrorMessage = "Min value is 1, max value is 15. Double separator is ','")]
+        [Range(typeof(decimal), "1.0", "15.0", ErrorMessage = "Min value is 1, max value is 15. Double separator is '.'")]
         public decimal? MinPh { get; set; }
         //[UIHint("NullableMaxPhTemplate")]
-        [Range(typeof(decimal), "1.0", "15.0", ErrorMessage = "Min value is 1, max value is 15. Double separator is ','")]
+        [Range(typeof(decimal), "1.0", "15.0", ErrorMessage = "Min value is 1, max value is 15. Double separator is '.'")]
         public decimal? MaxPh { get; set; }
         [Required]
         //[UIHint("NullableMinGhTemplate")]
-        [Range(typeof(decimal), "1.0", "30.0", ErrorMessage = "Min value is 1, max value is 15. Double separator is ','")]
+        [Range(typeof(decimal), "1.0", "30.0", ErrorMessage = "Min value is 1, max value is 30. Double separator is '.'")]
         public decimal? MinGh { get; set; }
         [Required]
         //[UIHint("NullableMaxGhTemplate")]
-        [Range(typeof(decimal), "1.0", "30.0", ErrorMessage = "Min value is 1, max value is 15. Double separator is ','")]
+        [Range(typeof(decimal), "1.0", "30.0", ErrorMessage = "Min value is 1, max value is 30. Double separator is '.'")]
         public decimal? MaxGh { get; set; }
 
 
@@ -86,7 +86,7 @@ namespace AquaMarket.Models
         //entity for store
         public virtual File File { get; set; }
         //entity for download
-        //[FileType("JPG,JPEG,PNG")]   //Can be used instead of attribute accept="image/*"
+        //[FileType("JPG,JPEG,PNG")]   //Custom validator be used instead of attribute accept="image/*" 
         //[FileExists] //Actually unic File name = File name + Date.DateTime.Now (in controller)
         [NotMapped]
         public HttpPostedFileBase Image { get; set; }

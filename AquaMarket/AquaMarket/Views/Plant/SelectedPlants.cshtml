@@ -1,0 +1,191 @@
+﻿@using System.Collections.Generic
+@using PagedList.Mvc;
+@using PagedList;
+@using AquaMarket.Models;
+
+@model AquaMarket.Models.PlantViewModel
+
+@{
+    ViewBag.Title = "SelectedPlants";
+}
+
+
+<div id="catalogue" class="partial_Lable">
+    <div id="catalogue_header" class="container-fluid">
+
+        <h2>Selected Plants</h2>
+        <hr />
+
+        @{
+
+            int.TryParse(Request.Cookies["ItemCount"].Value, out int selected);
+            SelectList ItemCounts = new SelectList(new List<int> { 3, 5, 10 }, selected);
+        }
+
+        <div class="row pagesizer_sections">
+            <div class="col-md-4 page_count">
+                @using (Html.BeginForm("SelectedPlants", "Plant", FormMethod.Get, new { @class = "pageSize_form" }))
+                {
+                    @Html.HiddenFor(model => model.Temp)
+                    @Html.HiddenFor(model => model.Ph)
+                    @Html.HiddenFor(model => model.Gh)
+                    @Html.HiddenFor(model => model.Area)
+                    @Html.HiddenFor(model => model.Light)
+                    @Html.HiddenFor(model => model.Complexity)
+                    <div>
+                        <p>Item count on page: </p>@Html.DropDownList("pageSize", ItemCounts, new { @class = "pageSize_dropdown" })
+                        <input type="submit" value="Submit" />
+                    </div>
+                }
+            </div>
+
+            <div class="col-md-4 list_pager">
+
+                @Html.PagedListPager((IPagedList)Model.Plants, page => Url.Action("SelectedPlants", new { pageIndex = page,
+               Temp = Model.Temp, Ph = Model.Ph, Gh = Model.Gh, Area = Model.Area, Light = Model.Light, Complexity = Model.Complexity}))
+            </div>
+
+            <div class="col-md-4 create_section">
+                <!--A button created by html-->
+                <div id="create_new">
+                    <a href="/Plant/Create" class="btn btn-info" role="button">Add plant</a>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div id="catalogue_header_filter">
+            <h4>Filter by:</h4>
+
+            @using (Html.BeginForm("SelectedPlants", "Plant", FormMethod.Post, new { @class = "pageSize_form" }))
+            {
+
+                @Html.HiddenFor(model => model.Temp)
+                @Html.HiddenFor(model => model.Ph)
+                @Html.HiddenFor(model => model.Gh)
+
+                <div class="row">
+                    <div id="area_filter" class="col-md-4 filter_block">
+                        @Html.LabelFor(model => model.Area, htmlAttributes: new { @class = "control-label" })
+                        @foreach (var item in Model.Areas)
+                        {
+                            <div class="filter_item">
+                                <span>@item.Text</span>
+                                @Html.RadioButtonFor(model => model.Area, item.Text)
+                            </div>
+                        }
+
+                    </div>
+                    <div id="light_filter" class="col-md-4 filter_block">
+                        @Html.LabelFor(model => model.Light, htmlAttributes: new { @class = "control-label" })
+                        @foreach (var item in Model.LightRequirements)
+                        {
+                            <div class="filter_item">
+                                <span>@item.Text </span>
+                                @Html.RadioButtonFor(model => model.Light, item.Text)
+                            </div>
+                        }
+                    </div>
+                    <div id="complexity_filter" class="col-md-4 filter_block">
+                        @Html.LabelFor(model => model.Complexity, htmlAttributes: new { @class = "control-label" })
+                        @foreach (var item in Model.ComplexityValues)
+                        {
+                            <div class="filter_item">
+                                <span>@item.Text </span>
+                                @Html.RadioButtonFor(model => model.Complexity, item.Text)
+                            </div>
+                        }
+                    </div>
+                    
+                </div>
+                <div class="row submit_centered">
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-success" /> |
+                        @Html.ActionLink("Reset filters", "SelectedPlants", new {
+                       Temp = Model.Temp, Ph = Model.Ph, Gh = Model.Gh, pageIndex = 1 }, new { @class= "btn btn-default"}) |
+                        @Html.ActionLink("Calculator", "Calculator", null, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            }
+                
+         </div>  
+    </div>
+
+
+    @foreach (var item in Model.Plants)
+    {
+        <div class="row plantItem container-fluid">
+            <div class="col-md-4 container plantitem_caption">
+                <div>
+                    <h4>@item.PlantName</h4>
+                </div>
+                @if (item.File != null)
+                {
+                    <div>
+                        <a href="@Url.Content("~/Files/" + item.File.FileName)">
+                            <img src="@Url.Content("~/Files/" + item.File.FileName)" alt="Plant image">
+                        </a>
+                    </div>
+                }
+                <div>
+                    <!--A button created by html helper-->
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info", role = "button" })
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="characteristics_table">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                <span>Location</span>
+                            </th>
+                            <th>
+                                <span>Color</span>
+                            </th>
+                            <th>
+                                <span>Light</span>
+                            </th>
+                            <th>
+                                <span>Temp. (C*)</span>
+                            </th>
+                            <th>
+                                <span>pH*</span>
+                            </th>
+                            <th>
+                                <span>gH*</span>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span>@item.Location</span>
+                            </td>
+                            <td>
+                                <span>@item.Coloration</span>
+                            </td>
+                            <td>
+                                <span>@item.Light</span>
+                            </td>
+
+                            <td>
+                                <span>@item.MinTemp - @item.MaxTemp</span>
+                            </td>
+                            <td>
+                                <span>@item.MinPh - @item.MaxPh</span>
+                            </td>
+                            <td>
+                                <span>@item.MinGh - @item.MaxGh</span>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="plant_description">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </div>
+            </div>
+
+
+        </div>
+    }
+</div>

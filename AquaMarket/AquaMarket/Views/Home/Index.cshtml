@@ -12,7 +12,7 @@
         for a particular aquarium with certain conditions.
     </p>
     <div id="button_start" class="container-fluid">
-        <a href="#" class="btn btn-default btn-block" role="button">Start</a>
+        @Html.ActionLink("Start",  "Index", "Plant",null, new { @class = "btn btn-default btn-block", role="button" })
     </div>
 
     <img src="Images/intro1.jpg" />

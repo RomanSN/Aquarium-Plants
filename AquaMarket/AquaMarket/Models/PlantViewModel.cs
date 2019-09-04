@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,9 +13,11 @@ namespace AquaMarket.Models
         public IEnumerable<Plant> Plants { get; set; }
 
         Plant Plant { get; set; }
-
+        [Required]
         public int? Temp { get; set; }
+        [Required]
         public decimal? Ph { get; set; }
+        [Required]
         public decimal? Gh { get; set; }
 
         public string Area { get; set; }
@@ -33,7 +37,7 @@ namespace AquaMarket.Models
             LightRequirements = Plant.LightRequirements;
             ComplexityValues = Plant.PlantComplexityValues;
         }
-
+        
     }
 
    

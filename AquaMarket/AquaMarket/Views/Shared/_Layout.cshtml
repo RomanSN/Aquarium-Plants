@@ -44,7 +44,7 @@
                     <ul class="nav navbar-nav navbar-collapse collapse">
                         <li>@Html.ActionLink("Catalogue", "Index", "Plant")</li>
                         <li><a href="#">Articles</a></li>
-                        <li><a href="#">Calсulator</a></li>
+                        <li>@Html.ActionLink("Calсulator", "Calculator", "Plant")</li>
                         <li>@Html.ActionLink("Contacts", "Contact", "Home")</li>
                     </ul>
                 </div>
@@ -217,11 +217,11 @@
         <hr />
         <div id="footer_menu" class="container-fluid">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Catalogue</a></li>
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Catalogue", "Index", "Plant")</li>
                 <li><a href="#">Articles</a></li>
-                <li><a href="#">Calсulator</a></li>
-                <li><a href="#">Contacts</a></li>
+                <li>@Html.ActionLink("Calсulator", "Calculator", "Plant")</li>
+                <li>@Html.ActionLink("Contacts", "Contact", "Home")</li>
             </ul>
         </div>
         <hr />

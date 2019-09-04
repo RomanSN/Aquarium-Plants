@@ -10,6 +10,7 @@ namespace AquaMarket.Models
         public int Id { get; set; }
         public string FileName { get; set; }
         public string FileType { get; set; }
-        public int PlantId { get; set; }
+        public int? PlantId { get; set; }
+        public int? ArticleId { get; set; }
     }
 }

@@ -3,7 +3,14 @@
 $('document').ready(function () {
 
     $('#delete_plant_btn').click(function () {
-        confirm('Are you sure you want to delete this item?');
+        var confirmationmessage = "Are you sure you want to delete this plant?";
+        if (!confirm(confirmationmessage)) {
+            event.preventDefault();
+            alert("Your item will not be deleted!");
+        }
+        else {
+            alert("Your item will be deleted!");
+        }   
     });
 
     $('html, body').animate({ scrollTop: $('.partial_Lable').offset().top - 230 }, 1000);

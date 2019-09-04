@@ -16,7 +16,7 @@ namespace AquaMarket.Controllers.Tests
         public void IndexTest()
         {
             PlantController contr = new PlantController();
-            var result =  contr.Index(null, null, null, null, null, null, null, null);
+            var result =  contr.Index( null, null, null);
             Assert.IsTrue(result != null);
         }
     }

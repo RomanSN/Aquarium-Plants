@@ -10,8 +10,8 @@
     <h2>Edit</h2>
     <hr />
        
-            @using (Html.BeginForm("Edit", "Plant", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
+ @using (Html.BeginForm("Edit", "Plant", FormMethod.Post, new { enctype = "multipart/form-data" }))
+ {
                 @Html.ValidationSummary(true)
                 @Html.AntiForgeryToken()
 
@@ -206,5 +206,5 @@
             @Html.ActionLink("Back", null, null, new { @class = "btn btn-default", role = "button", href = Request.UrlReferrer })
         </div>
     </div>
-            }
+  }
 </div>
