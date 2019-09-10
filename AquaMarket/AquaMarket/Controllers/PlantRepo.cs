@@ -98,12 +98,7 @@ namespace AquaMarket.Controllers
             var pSize = int.Parse(System.Web.HttpContext.Current.Response.Cookies["ItemCount"].Value);
 
             result = result.ToPagedList(pIndex, pSize);
-
-            pvm.PageInfo = new PageInfo()
-            {
-                PageSize = pSize,
-                PageNumber = pIndex
-            };
+           
             pvm.Plants = result;
 
             return pvm;
@@ -218,8 +213,12 @@ namespace AquaMarket.Controllers
         {
             db = new AquaDBContext();
             File file = await db.Files.FindAsync(id);
-            db.Files.Remove(file);
-            await db.SaveChangesAsync();
+            if (file != null)
+            {
+                db.Files.Remove(file);
+                await db.SaveChangesAsync();
+            }
+            
             var path = System.Web.HttpContext.Current.Server.MapPath("~/Files/" + file.FileName);
             if (System.IO.File.Exists(path))
             {

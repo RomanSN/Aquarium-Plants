@@ -27,7 +27,7 @@ namespace AquaMarket.Controllers
             return article;
         }
 
-        public async Task Create(Article article)
+        public async Task<Article> Create(Article article)
         {
             db.Articles.Add(article);
             await db.SaveChangesAsync();
@@ -54,6 +54,7 @@ namespace AquaMarket.Controllers
             createdArticle.FileId = createdfile.Id;
             db.Entry(createdArticle).State = EntityState.Modified;
             await db.SaveChangesAsync();
+            return createdArticle;
         }
 
         public async Task<Article> Edit(int? id)
@@ -87,19 +88,24 @@ namespace AquaMarket.Controllers
             await db.SaveChangesAsync();
         }
        
-        public async Task DeleteConfirmed(int id)
+        public async Task<Article> DeleteConfirmed(int id)
         {
             Article article = await db.Articles.FindAsync(id);
             db.Articles.Remove(article);
             await db.SaveChangesAsync();
+            return article;
         }
 
         public async Task DeleteFileConfirmed(int id)
         {
             db = new AquaDBContext();
             File file = await db.Files.FindAsync(id);
-            db.Files.Remove(file);
-            await db.SaveChangesAsync();
+            if (file != null)
+            {
+                db.Files.Remove(file);
+                await db.SaveChangesAsync();
+            }
+           
             var path = System.Web.HttpContext.Current.Server.MapPath("~/Files/" + file.FileName);
             if (System.IO.File.Exists(path))
             {

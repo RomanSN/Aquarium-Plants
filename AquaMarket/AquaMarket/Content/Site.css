@@ -466,17 +466,17 @@ input[type=file]{
 
 /*Catalogue page (index)*/
 
-#catalogue {
+.catalogue {
     margin:7px;
 }
-#catalogue h2 {
+.catalogue h2 {
     text-align: center;
 }
-#catalogue_header {
+.catalogue_header {
     background-color: #72DDC7;
     border-radius: 6px;
 }
-#catalogue_header hr {
+.catalogue_header hr {
     margin-bottom: 0px;
 }
 .pagesizer_sections {
@@ -513,7 +513,7 @@ input[type=file]{
     text-align:center;
 }
 
-.create_section a {
+.create_button a {
     float: right !important;
 }
 /*Plant items*/
@@ -549,25 +549,45 @@ input[type=file]{
     background-color: #E4FFFB;
     border-bottom: 1px solid black !important;
 }
+/*Article items*/
+.article_Item {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 10px !important;
+    background-color: honeydew;
+    padding: 10px;
+}
+
+.article_Item img {
+    max-width: 97%;
+    height: auto;
+    margin-bottom: 10px;
+}
+.article_Item hr {
+    border-top-width:2px;
+}
+
  /*Details page*/
 
-.description {
+.plant_description {
     display: flex;
     flex-direction: column;
 }
-.description img{
-    align-self:center;
+.plant_description img {
+    align-self: center;
+    margin-bottom: 10px;
+}
+#article_details img {
     margin-bottom:10px;
 }
-
+.details_buttons {
+    margin-top:10px;
+}
 /*Add new plant page*/
-
 /*Calculator page*/
-
 /*Selected plants page*/
-
-.filter_item{
-    display:inline-flex;
+.filter_item {
+    display: inline-flex;
 }
 .filter_block{
     display:flex;

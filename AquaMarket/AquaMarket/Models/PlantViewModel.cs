@@ -28,8 +28,6 @@ namespace AquaMarket.Models
         public SelectList LightRequirements { get; set; }
         public SelectList ComplexityValues { get; set; }
 
-        public PageInfo PageInfo { get; set; }
-
         public PlantViewModel()
         {
             Plant = new Plant();

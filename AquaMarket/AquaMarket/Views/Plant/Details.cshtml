@@ -5,7 +5,7 @@
     ViewBag.Title = "Details";
 }
 
-<div id="details" class="partial_Lable partial_content">
+<div id="plant_details" class="partial_Lable partial_content">
 
     <h2>Details</h2>
     <hr />
@@ -174,7 +174,7 @@
                 </dl>
 
             </div>
-            <div class="col-md-8 description">
+            <div class="col-md-8 plant_description">
                 @if (Model.File != null)
                 {
                     <img src="@Url.Content("~/Files/" + Model.File.FileName)" width="300" alt="Plant image">

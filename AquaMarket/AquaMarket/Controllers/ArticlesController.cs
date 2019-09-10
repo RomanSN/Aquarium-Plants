@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AquaMarket.Models;
+using PagedList;
 
 namespace AquaMarket.Controllers
 {
@@ -16,7 +17,7 @@ namespace AquaMarket.Controllers
         private ArticlesRepo repo = new ArticlesRepo();
 
         [HttpGet]
-        public async Task<ActionResult> Index(ArticleViewModel viewModel)
+        public async Task<ActionResult> Index(ArticleViewModel viewModel,  int pageInd = 1)
         {
             ArticleViewModel avm = new ArticleViewModel();
             IEnumerable<Article> result = await repo.Index();
@@ -25,14 +26,21 @@ namespace AquaMarket.Controllers
                 result = result.Where(p => p.Section == viewModel.Section).ToList();
                 avm.Section = viewModel.Section;
             }
-
-            var pIndex = viewModel.PageInfo.PageNumber ?? 1;
-
-            avm.PageInfo = new PageInfo()
+            else
             {
-                PageSize = 5,
-                PageNumber = pIndex
-            };
+                avm.Section = "All sections";
+            }
+
+            int pSize = 5;
+            var responsecookies = System.Web.HttpContext.Current.Response.Cookies;
+            if (responsecookies["ArticlePageIndex"] == null)
+            {
+                responsecookies.Set(new HttpCookie("ArticlePageIndex"));
+            }
+            responsecookies["ArticlePageIndex"].Value = pageInd.ToString();
+            result = result.ToPagedList(pageInd, pSize);
+            
+            avm.Articles = result;
 
             return View(avm);
         }
@@ -56,24 +64,25 @@ namespace AquaMarket.Controllers
         public async Task<ActionResult> Create()
         {
             ViewBag.FileIds = new SelectList(await repo.GetFiles(), "Id", "FileName");
-            return View();
+            return View(new Article());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Section,Content,Likes,FileId,Image")] Article article)
+        public async Task<ActionResult> Create([Bind(Include = "Section,Title,Content,Likes,Image")] Article article)
         {
             if (ModelState.IsValid)
             {
-                await repo.Create(article);
-                return RedirectToAction("Index");
+                
+                Article created = await repo.Create(article);
+                return RedirectToAction("Details", new { id = created.Id });
             }
 
             ViewBag.FileId = new SelectList(await repo.GetFiles(), "Id", "FileName");
             return View(article);
         }
 
-        // GET: Articles/Edit/5
+        [HttpGet]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,7 +99,7 @@ namespace AquaMarket.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Section,Content,Likes,FileId, Image")] Article article)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Section,Title,Content,Likes, Image")] Article article)
         {
             if (ModelState.IsValid)
             {
@@ -100,13 +109,11 @@ namespace AquaMarket.Controllers
             return View(article);
         }
 
-        // POST: Articles/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            await repo.DeleteConfirmed(id);
-            return RedirectToAction("Index");
+            Article deletedArticle = await repo.DeleteConfirmed(id);
+            return RedirectToAction("Index", new {Section = deletedArticle.Section});
         }
         [HttpGet]
         public async Task<ActionResult> DeleteFileConfirmed(int fileId)

@@ -1,50 +1,35 @@
-﻿@model AquaMarket.Models.Article
+﻿@using AquaMarket.Models
+@model AquaMarket.Models.Article
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div id="article_details" class="partial_Lable partial_content">
 
-<div>
-    <h4>Article</h4>
+    <h2>@Model.Title</h2>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.File.FileName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.File.FileName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Section)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Section)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Likes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Likes)
-        </dd>
-
-    </dl>
+    <div class="row " style="display:flex">
+        <div class="col-md-4">
+            @if (Model.File != null)
+            {
+                <img src="@Url.Content("~/Files/" + Model.File.FileName)" width="300" alt="Plant image">
+            }
+        </div>
+        <div class="col-md-8">
+            <div>
+                @Html.DisplayFor(Model => Model.Content)
+            </div>
+        </div>
+    </div>
+    <div class="details_buttons">
+        <!--Created with jquery confirmation for demonstration Ajax.ActionLink alternative-->
+        @{ 
+            int.TryParse(System.Web.HttpContext.Current.Request.Cookies["ArticlePageIndex"].Value, out int index);
+        }
+        @Html.ActionLink("Delete", "DeleteConfirmed", new { id = Model.Id }, new { @class = "btn btn-danger", id = "delete_plant_btn" }) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" }) |
+        @Html.ActionLink("Catalogue", "Index", new { pageInd = index }, new { @class = "btn btn-info" })
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

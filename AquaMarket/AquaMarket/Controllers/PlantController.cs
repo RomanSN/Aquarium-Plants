@@ -45,6 +45,7 @@ namespace AquaMarket.Controllers
         {
             repo = new PlantRepo();
             var pvm = await repo.GetAllPlants(viewModel, pageIndex, pageSize);
+            
             return View(pvm);
         }
 
@@ -70,7 +71,7 @@ namespace AquaMarket.Controllers
             repo = new PlantRepo();
             //IEnumerable<Species> species = await repo.GetSpecies();
             ViewBag.PlantSpeciesNames = new SelectList(await repo.GetSpecies(), "id", "Name");
-            return View();
+            return View(new Plant());
         }
 
         // POST: Plants/Create

@@ -1,51 +1,71 @@
-﻿@model IEnumerable<AquaMarket.Models.Article>
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+
+@model AquaMarket.Models.ArticleViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Articles";
 }
 
-<h2>Index</h2>
+<div class="partial_Lable catalogue">
+    <div class="container-fluid catalogue_header">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.File.FileName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Section)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Likes)
-        </th>
-        <th></th>
-    </tr>
+        <h2>@Model.Section</h2>
+        <hr />
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.File.FileName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Section)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Likes)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
 
-</table>
+
+        <div class="row pagesizer_sections">
+            <div class="col-md-4 create_section2">
+                <div id="create_new2">
+                    <a href="/Articles/Create" class="btn btn-info" role="button">Add article</a>
+                </div>
+            </div>
+
+            <div class="col-md-4 list_pager">
+                @Html.PagedListPager((IPagedList)Model.Articles, page => Url.Action("Index", new { pageInd = page }))
+            </div>
+
+            <div class="col-md-4 create_button">
+                <!--A button created by html-->
+                <div id="create_new">
+                    <a href="/Articles/Create" class="btn btn-info" role="button">Add article</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @foreach (var item in Model.Articles)
+    {
+        <div class="row article_Item container-fluid">
+            <div>
+                <h4>@item.Title</h4>
+                <hr />
+            </div>
+            <div class="col-md-4 container">
+
+                @if (item.File != null)
+                {
+                    <div>
+                        <a href="@Url.Content("~/Files/" + item.File.FileName)">
+                            <img src="@Url.Content("~/Files/" + item.File.FileName)" alt="Article image">
+                        </a>
+                    </div>
+                }
+                <div>
+                    <!--A button created by html helper-->
+                    @Html.ActionLink("Read article", "Details", new { id = item.Id }, new { @class = "btn btn-info", role = "button" })
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </div>
+            </div>
+
+        </div>
+    }
+</div>

@@ -230,6 +230,10 @@
     <Compile Include="Migrations\201909042146161_MigrateDB9.Designer.cs">
       <DependentUpon>201909042146161_MigrateDB9.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909051902540_MigrateDB10.cs" />
+    <Compile Include="Migrations\201909051902540_MigrateDB10.Designer.cs">
+      <DependentUpon>201909051902540_MigrateDB10.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticleViewModel.cs" />
     <Compile Include="Models\PageInfo.cs" />
@@ -430,6 +434,7 @@
     <Content Include="Views\Articles\Details.cshtml" />
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Articles\Index.cshtml" />
+    <Content Include="Views\Articles\DeleteFileConfirmed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
@@ -498,6 +503,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909042146161_MigrateDB9.resx">
       <DependentUpon>201909042146161_MigrateDB9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909051902540_MigrateDB10.resx">
+      <DependentUpon>201909051902540_MigrateDB10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

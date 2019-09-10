@@ -15,13 +15,16 @@ namespace AquaMarket.Models
         [Required]
         public string Section { get; set; }
         public SelectList Sections { get; set; }
-        public PageInfo PageInfo { get; set; }
 
         public ArticleViewModel()
         {
             Article = new Article();
-            Sections = Article.Sections;
-            PageInfo = new PageInfo();
+            Sections = new SelectList(new List<string>(){
+                    "All plants",
+                    "Section_1",
+                    "Section_2",
+                    "Section_3"
+            }); ;
         }
 
     }

@@ -14,6 +14,8 @@ namespace AquaMarket.Models
         [Required]
         public string Section { get; set; }
         [Required]
+        public string Title { get; set; }
+        [Required]
         public string Content { get; set; }
         public int? Likes { get; set; }
         public int? FileId { get; set; }
@@ -23,15 +25,15 @@ namespace AquaMarket.Models
         [NotMapped]
         public HttpPostedFileBase Image { get; set; }
 
-        internal SelectList Sections;
-
-        public Article()
-        {
-            Sections = new SelectList(new List<string>(){
+        public SelectList Sections = new SelectList(new List<string>(){
                     "Section_1",
                     "Section_2",
                     "Section_3"
-            });
+         });
+
+        public Article()
+        {
+            
         }
     }
 }
