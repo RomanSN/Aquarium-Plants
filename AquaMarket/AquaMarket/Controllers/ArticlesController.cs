@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using AquaMarket.Models;
 using PagedList;
+using System.Threading;
 
 namespace AquaMarket.Controllers
 {
@@ -43,6 +44,12 @@ namespace AquaMarket.Controllers
             avm.Articles = result;
 
             return View(avm);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> Autocomplete(string term)
+        {
+            return await repo.Autocomplete(term);
         }
 
         [HttpGet]
@@ -99,7 +106,7 @@ namespace AquaMarket.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Section,Title,Content,Likes, Image")] Article article)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Section,Title,Content,Likes,FileId, Image")] Article article)
         {
             if (ModelState.IsValid)
             {
@@ -121,6 +128,12 @@ namespace AquaMarket.Controllers
             await repo.DeleteFileConfirmed(fileId);
             return PartialView();
         }
-       
+        [ChildActionOnly]
+        public ActionResult Sections()
+        {
+            Article article = new Article();
+
+            return PartialView("_ArticleSectionsPartial", article);
+        }
     }
 }

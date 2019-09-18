@@ -10,6 +10,7 @@ namespace AquaMarket.Models
 {
     public class Article
     {
+        [Display(Name ="ArticleId")]
         public int Id { get; set; }
         [Required]
         public string Section { get; set; }

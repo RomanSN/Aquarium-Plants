@@ -44,6 +44,34 @@ $('document').ready(function () {
         
     });
 
-});
+    $('#article_search').autocomplete({
 
+        source: function (request, response) {
+            $.ajax({
+                url: app.Urls.baseUrl + 'Articles/Autocomplete',
+                data: { term: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data,
+                        function (item) {
+                            return {
+                                label: item.Title,
+                                value2: item.Id
+                            }
+                        }));
+                }
+            })
+        },
+        select:
+            function (event, ui) {
+                $('#article_search').val(ui.item.label);
+                $('#ArticleId').val(ui.item.value2);
+                return false;
+            },
+        minLength: 4,
+
+    });
+
+});
 

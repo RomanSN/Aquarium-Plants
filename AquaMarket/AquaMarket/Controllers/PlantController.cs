@@ -7,6 +7,7 @@ using PagedList;
 using System.Web;
 using System.Collections.Generic;
 using System;
+using System.Threading;
 
 namespace AquaMarket.Controllers
 {
@@ -149,8 +150,27 @@ namespace AquaMarket.Controllers
             await repo.DeleteConfirmed(id);
             return RedirectToAction("Index");
         }
+        [ChildActionOnly]
+        public ActionResult PlantSpecies()
+        {
+            //calling an async method from a sync method for partial view
+            var syncContext = SynchronizationContext.Current;
+            SynchronizationContext.SetSynchronizationContext(null);
+            repo = new PlantRepo();
+            var result =  repo.GetSpecies();
+            IEnumerable<Species> species = result.Result;
 
-       
+            SynchronizationContext.SetSynchronizationContext(syncContext);
+
+            return PartialView("_PlantSpeciesPartial", species);
+        }
+        [ChildActionOnly]
+        public ActionResult PlantTypes()
+        {
+            Plant plant = new Plant();
+
+            return PartialView("_PlantTypesPartial", plant);
+        }
     }
 }
 

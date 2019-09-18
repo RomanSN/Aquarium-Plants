@@ -8,10 +8,23 @@
 }
 
 
-<div  class="partial_Lable catalogue">
+<div class="partial_Lable catalogue">
     <div class="container-fluid catalogue_header">
 
-        <h2>Plant catalogue from A to Z</h2>
+        @if (Model.PlantType != null)
+        {
+            <h2>Plant type: @Model.PlantType</h2>
+        }
+        else if (@Model.SpeciesName != null)
+        {
+            <h2>Plant species: @Model.SpeciesName</h2>
+        }
+        else
+        {
+            <h2>Plant catalogue from A to Z</h2>
+        }
+
+
         <hr />
 
         @{
@@ -24,26 +37,34 @@
             <div class="col-md-4 page_count">
                 @using (Html.BeginForm("Index", "Plant", FormMethod.Get, new { @class = "pageSize_form" }))
                 {
-                    <div>
+                    @Html.HiddenFor(model => model.SpeciesId)
+                    @Html.HiddenFor(model => model.PlantType)
+                    <div class="select_count">
                         <p>Item count on page: </p>@Html.DropDownList("pageSize", ViewBag.ItemCounts as SelectList, new { @class = "pageSize_dropdown" }) <input type="submit" value="Submit" />
                     </div>
                 }
             </div>
 
             <div class="col-md-4 list_pager">
-                
-                @Html.PagedListPager((IPagedList)Model.Plants, page => Url.Action("Index", new { pageIndex = page }))
+
+                @Html.PagedListPager((IPagedList)Model.Plants, page => Url.Action("Index",
+                  new { pageIndex = page, PlantType = Model.PlantType, SpeciesId = Model.SpeciesId }))
             </div>
 
-            <div class="col-md-4 create_section">
+            <div class="col-md-4 create_button">
                 <!--A button created by html-->
-                <div id="create_new">
+                <div id="create_new_plant">
                     <a href="/Plant/Create" class="btn btn-info" role="button">Add plant</a>
                 </div>
             </div>
         </div>
     </div>
-
+    @if (Model.Plants.Count() < 1)
+    {
+        <div class="nothing_found">
+            <h2>Nothing found for your query</h2>
+        </div>
+    }
 
     @foreach (var item in Model.Plants)
     {
@@ -114,12 +135,12 @@
                         </tr>
                     </table>
                 </div>
-                <div >
+                <div>
                     @Html.DisplayFor(modelItem => item.Description)
                 </div>
             </div>
 
-            
+
         </div>
     }
 </div>

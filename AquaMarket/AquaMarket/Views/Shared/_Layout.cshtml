@@ -158,50 +158,30 @@
         <div id="leftcolumn">
             <div class="menu">
                 <p class="menu_header">Aquarium plants catalogue</p>
+
                 <ul class="menu_list">
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
-                    <li><a href="#">Aquarium plants</a></li>
+                    @{
+                        Html.RenderAction("PlantSpecies", "Plant");
+                    }
+                    
                 </ul>
             </div>
             <div class="menu">
                 <p class="menu_header">Types of aquarium plants</p>
                 <ul class="menu_list">
-                    <li><a href="#">Type</a></li>
-                    <li><a href="#">Type</a></li>
-                    <li><a href="#">Type</a></li>
-                    <li><a href="#">Type</a></li>
-                    <li><a href="#">Type</a></li>
-                    <li><a href="#">Type</a></li>
+                    @{
+                        Html.RenderAction("PlantTypes", "Plant");
+                    }
+                    
                 </ul>
             </div>
             <div class="menu">
                 <p class="menu_header">articles</p>
                 <ul class="menu_list">
-                    <li><a href="#">Article</a></li>
-                    <li><a href="#">Article</a></li>
-                    <li><a href="#">Article</a></li>
-                    <li><a href="#">Article</a></li>
-                    <li><a href="#">Article</a></li>
-                    <li><a href="#">Article</a></li>
-                    <li><a href="#">Article</a></li>
-                    <li><a href="#">Article</a></li>
-                    <li><a href="#">Article</a></li>
-                    <li><a href="#">Article</a></li>
-                    <li><a href="#">Article</a></li>
-                    <li><a href="#">Article</a></li>
+                    @{
+                        Html.RenderAction("Sections", "Articles");
+                    }
+                    
                 </ul>
             </div>
 

@@ -435,6 +435,9 @@
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Articles\Index.cshtml" />
     <Content Include="Views\Articles\DeleteFileConfirmed.cshtml" />
+    <Content Include="Views\Plant\_PlantSpeciesPartial.cshtml" />
+    <Content Include="Views\Plant\_PlantTypesPartial.cshtml" />
+    <Content Include="Views\Articles\_ArticleSectionsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

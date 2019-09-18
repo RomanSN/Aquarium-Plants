@@ -1,0 +1,9 @@
+﻿@model AquaMarket.Models.Plant
+
+
+
+@foreach (var item in Model.Types)
+{
+    <li>@Html.ActionLink(item.Text, "Index", "Plant", new { PlantType = item.Text }, null)</li>
+    
+}

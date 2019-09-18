@@ -24,6 +24,21 @@ namespace AquaMarket.Controllers
             PlantViewModel pvm = new PlantViewModel();
             IEnumerable<Plant> result = await db.Plants.Include(p => p.File).Include(p => p.PlantSpecies).ToListAsync();
 
+
+            if (viewModel.SpeciesId != null)
+            {
+                result = result.Where(p => p.SpeciesId == viewModel.SpeciesId).ToList();
+                pvm.SpeciesId = viewModel.SpeciesId;
+                Species species = await db.Species.FirstOrDefaultAsync(s => s.Id == viewModel.SpeciesId);
+                pvm.SpeciesName = species.Name;
+            }
+            
+
+            if (viewModel.PlantType != null)
+            {
+                result = result.Where(p => p.PlantType == viewModel.PlantType).ToList();
+                pvm.PlantType = viewModel.PlantType;
+            }
             if (viewModel.Area!= null && !viewModel.Area.Equals("Area"))
             {
                 result = result.Where(p => p.Area == viewModel.Area).ToList();
@@ -98,6 +113,8 @@ namespace AquaMarket.Controllers
             var pSize = int.Parse(System.Web.HttpContext.Current.Response.Cookies["ItemCount"].Value);
 
             result = result.ToPagedList(pIndex, pSize);
+
+
            
             pvm.Plants = result;
 
@@ -127,7 +144,12 @@ namespace AquaMarket.Controllers
         public async Task<Plant> Details(int? id)
         {
             db = new AquaDBContext();
-            
+            var responsecookies = System.Web.HttpContext.Current.Response.Cookies;
+            if (responsecookies["PageIndex"] == null)
+            {
+                responsecookies.Set(new HttpCookie("PageIndex"));
+            }
+
             Plant plant = await db.Plants.Include(p => p.File).Include(p => p.PlantSpecies).FirstOrDefaultAsync(t => t.Id == id);
             return plant;
         }
@@ -143,7 +165,7 @@ namespace AquaMarket.Controllers
 
             if (plant.Image != null)
                 {
-                    string fileName = System.IO.Path.GetFileName(plant.Image.FileName);
+                    string fileName = System.IO.Path.GetFileNameWithoutExtension(plant.Image.FileName) + DateTime.Now.Millisecond.ToString() + System.IO.Path.GetExtension(plant.Image.FileName);
                     string path = System.Web.HttpContext.Current.Server.MapPath("~/Files/" + fileName);
                     plant.Image.SaveAs(path);
                     File NewFile = new File

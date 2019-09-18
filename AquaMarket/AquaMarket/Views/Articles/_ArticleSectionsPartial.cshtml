@@ -1,0 +1,10 @@
+﻿@model AquaMarket.Models.Article
+
+
+
+@foreach (var item in Model.Sections)
+{
+    <li>@Html.ActionLink(item.Text, "Index", "Articles", new { Section = item.Text }, null)</li>
+
+}
+

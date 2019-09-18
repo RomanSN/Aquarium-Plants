@@ -10,8 +10,8 @@
 }
 
 
-<div id="catalogue" class="partial_Lable">
-    <div id="catalogue_header" class="container-fluid">
+<div class="partial_Lable catalogue">
+    <div  class="container-fluid catalogue_header">
 
         <h2>Selected Plants</h2>
         <hr />
@@ -32,7 +32,7 @@
                     @Html.HiddenFor(model => model.Area)
                     @Html.HiddenFor(model => model.Light)
                     @Html.HiddenFor(model => model.Complexity)
-                    <div>
+                    <div class="select_count">
                         <p>Item count on page: </p>@Html.DropDownList("pageSize", ItemCounts, new { @class = "pageSize_dropdown" })
                         <input type="submit" value="Submit" />
                     </div>
@@ -45,7 +45,7 @@
                Temp = Model.Temp, Ph = Model.Ph, Gh = Model.Gh, Area = Model.Area, Light = Model.Light, Complexity = Model.Complexity}))
             </div>
 
-            <div class="col-md-4 create_section">
+            <div class="col-md-4 create_button">
                 <!--A button created by html-->
                 <div id="create_new">
                     <a href="/Plant/Create" class="btn btn-info" role="button">Add plant</a>
@@ -109,7 +109,12 @@
                 
          </div>  
     </div>
-
+    @if(Model.Plants.Count() < 1)
+    {
+        <div class="nothing_found">
+            <h2>Nothing found for your query</h2>
+        </div>
+    }
 
     @foreach (var item in Model.Plants)
     {

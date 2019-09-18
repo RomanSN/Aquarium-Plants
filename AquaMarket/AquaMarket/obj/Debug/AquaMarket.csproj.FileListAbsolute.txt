@@ -426,3 +426,4 @@ C:\SelfDev\AquaMarket\AquaMarket\AquaMarket\obj\Debug\AquaMarket.dll
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarket\obj\Debug\AquaMarket.pdb
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarket\obj\Debug\AquaMarket.Migrations.MigrateDB9.resources
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarket\obj\Debug\AquaMarket.Migrations.MigrateDB10.resources
+C:\SelfDev\AquaMarket\AquaMarket\AquaMarket\obj\Debug\AquaMarket.csprojAssemblyReference.cache

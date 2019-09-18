@@ -21,6 +21,26 @@ namespace AquaMarket.Controllers
             return articles;
         }
 
+        public async Task<JsonResult> Autocomplete(string term)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+
+            IEnumerable<Article> articles = await db.Articles.ToListAsync();
+            List<Article> filteredArticles = new List<Article>();
+            foreach (Article a in articles)
+            {
+                string title = a.Title.ToLower();
+                string t = term.ToLower();
+                if (title.Contains(t))
+                {
+                    filteredArticles.Add(a);
+                }
+            }
+
+            var result = Json(filteredArticles, JsonRequestBehavior.AllowGet);
+            return result;
+        }
+
         public async Task<Article> Details(int? id)
         {
             Article article = await db.Articles.FindAsync(id);
@@ -37,7 +57,7 @@ namespace AquaMarket.Controllers
 
             if (article.Image != null)
             {
-                string fileName = System.IO.Path.GetFileName(article.Image.FileName);
+                string fileName = System.IO.Path.GetFileNameWithoutExtension(article.Image.FileName) + DateTime.Now.Millisecond.ToString() + System.IO.Path.GetExtension(article.Image.FileName);
                 string path = System.Web.HttpContext.Current.Server.MapPath("~/Files/" + fileName);
                 article.Image.SaveAs(path);
                 File NewFile = new File

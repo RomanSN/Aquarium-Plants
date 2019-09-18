@@ -12,6 +12,10 @@ namespace AquaMarket.Models
     {
         public IEnumerable<Plant> Plants { get; set; }
 
+        public int? SpeciesId { get; set; }
+
+        public string SpeciesName { get; set; }
+
         Plant Plant { get; set; }
         [Required]
         public int? Temp { get; set; }
@@ -23,6 +27,8 @@ namespace AquaMarket.Models
         public string Area { get; set; }
         public string Light { get; set; }
         public string Complexity { get; set; }
+
+        public string PlantType { get; set; }
 
         public SelectList Areas { get; set; }
         public SelectList LightRequirements { get; set; }

@@ -1,0 +1,8 @@
+﻿@model IEnumerable<AquaMarket.Models.Species>
+
+
+
+@foreach (var item in Model) {
+   <li>@Html.ActionLink(item.Name, "Index","Plant", new { SpeciesId  = item.Id }, null)</li>
+}
+
