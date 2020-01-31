@@ -39,7 +39,6 @@ namespace AquaMarket.Controllers
                 _signInManager = value; 
             }
         }
-
         public ApplicationUserManager UserManager
         {
             get
@@ -51,7 +50,6 @@ namespace AquaMarket.Controllers
                 _userManager = value;
             }
         }
-
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -60,7 +58,6 @@ namespace AquaMarket.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
         //
         // POST: /Account/Login
         [HttpPost]
@@ -86,11 +83,10 @@ namespace AquaMarket.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Неудачная попытка входа.");
+                    ModelState.AddModelError("", "Unsuccessful login attempt.");
                     return View(model);
             }
         }
-
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -103,7 +99,6 @@ namespace AquaMarket.Controllers
             }
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-
         //
         // POST: /Account/VerifyCode
         [HttpPost]
@@ -115,7 +110,6 @@ namespace AquaMarket.Controllers
             {
                 return View(model);
             }
-
             // Приведенный ниже код защищает от атак методом подбора, направленных на двухфакторные коды. 
             // Если пользователь введет неправильные коды за указанное время, его учетная запись 
             // будет заблокирована на заданный период. 
@@ -133,7 +127,6 @@ namespace AquaMarket.Controllers
                     return View(model);
             }
         }
-
         //
         // GET: /Account/Register
         [AllowAnonymous]
@@ -141,7 +134,6 @@ namespace AquaMarket.Controllers
         {
             return View();
         }
-
         //
         // POST: /Account/Register
         [HttpPost]
@@ -151,10 +143,11 @@ namespace AquaMarket.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.NickName, Email = model.Email, NickName = model.NickName, Age = model.Age, Country = model.Country };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "user");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // Дополнительные сведения о включении подтверждения учетной записи и сброса пароля см. на странице https://go.microsoft.com/fwlink/?LinkID=320771.
@@ -171,7 +164,6 @@ namespace AquaMarket.Controllers
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
         }
-
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -184,7 +176,6 @@ namespace AquaMarket.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
-
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
@@ -192,7 +183,6 @@ namespace AquaMarket.Controllers
         {
             return View();
         }
-
         //
         // POST: /Account/ForgotPassword
         [HttpPost]
@@ -220,7 +210,6 @@ namespace AquaMarket.Controllers
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
         }
-
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
@@ -228,7 +217,6 @@ namespace AquaMarket.Controllers
         {
             return View();
         }
-
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
@@ -236,7 +224,6 @@ namespace AquaMarket.Controllers
         {
             return code == null ? View("Error") : View();
         }
-
         //
         // POST: /Account/ResetPassword
         [HttpPost]
@@ -262,7 +249,6 @@ namespace AquaMarket.Controllers
             AddErrors(result);
             return View();
         }
-
         //
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
@@ -270,7 +256,6 @@ namespace AquaMarket.Controllers
         {
             return View();
         }
-
         //
         // POST: /Account/ExternalLogin
         [HttpPost]
@@ -278,10 +263,11 @@ namespace AquaMarket.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
+            Session["Workaround"] = 0;
             // Запрос перенаправления к внешнему поставщику входа
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+            return new ChallengeResult(provider, redirectUrl);
         }
-
         //
         // GET: /Account/SendCode
         [AllowAnonymous]
@@ -296,7 +282,6 @@ namespace AquaMarket.Controllers
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-
         //
         // POST: /Account/SendCode
         [HttpPost]
@@ -316,7 +301,6 @@ namespace AquaMarket.Controllers
             }
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
-
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
@@ -333,7 +317,7 @@ namespace AquaMarket.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Home");//RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -346,7 +330,6 @@ namespace AquaMarket.Controllers
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
-
         //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
@@ -367,15 +350,20 @@ namespace AquaMarket.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.NickName, Email = model.Email , NickName = model.NickName, Age = model.Age, Country = model.Country};
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        result = await UserManager.AddToRoleAsync(user.Id, "user");
+                        if (result.Succeeded)
+                        {
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            return RedirectToAction("Index", "Home");//RedirectToLocal(returnUrl);
+                        }
+                       
                     }
                 }
                 AddErrors(result);
@@ -394,7 +382,6 @@ namespace AquaMarket.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
-
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]

@@ -5,14 +5,15 @@ namespace AquaMarket.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<AquaMarket.Models.AquaDBContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<AquaMarket.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            ContextKey = "AquaMarket.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(AquaMarket.Models.AquaDBContext context)
+        protected override void Seed(AquaMarket.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

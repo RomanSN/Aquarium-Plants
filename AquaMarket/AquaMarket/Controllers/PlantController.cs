@@ -67,6 +67,7 @@ namespace AquaMarket.Controllers
         }
 
         // GET: Plants/Create
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Create()
         {
             repo = new PlantRepo();

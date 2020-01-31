@@ -58,7 +58,6 @@ C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarketTests\obj\Debug\A
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarketTests\obj\Debug\AquaMarketTests.dll
 C:\Users\Admin\source\repos\AquariumPlant\AquaMarket\AquaMarketTests\obj\Debug\AquaMarketTests.pdb
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\obj\Debug\AquaMarketTests.csprojAssemblyReference.cache
-C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\obj\Debug\AquaMarketTests.csproj.CoreCompileInputs.cache
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\obj\Debug\AquaMarketTests.dll
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\obj\Debug\AquaMarketTests.pdb
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
@@ -87,7 +86,6 @@ C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\Microsoft.Owin.Host.S
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\System.Web.Razor.dll
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\Microsoft.Web.Infrastructure.dll
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\System.Net.Http.Formatting.dll
-C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\Newtonsoft.Json.dll
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\System.Web.WebPages.Deployment.dll
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\AquaMarket.pdb
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\AquaMarket.dll.config
@@ -117,3 +115,9 @@ C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\ru\Microsoft.AspNet.I
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\ru\System.Web.Razor.resources.dll
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\ru\System.Web.WebPages.Deployment.resources.dll
 C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\obj\Debug\AquaMarketTests.csproj.CopyComplete
+C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\Microsoft.Owin.Security.Facebook.dll
+C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\Microsoft.Owin.Security.Google.dll
+C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\Microsoft.Owin.Security.Facebook.xml
+C:\SelfDev\AquaMarket\AquaMarket\AquaMarketTests\bin\Debug\Microsoft.Owin.Security.Google.xml

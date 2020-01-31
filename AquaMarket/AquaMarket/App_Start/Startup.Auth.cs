@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using AquaMarket.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace AquaMarket
 {
@@ -46,23 +47,23 @@ namespace AquaMarket
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             // Раскомментируйте приведенные далее строки, чтобы включить вход с помощью сторонних поставщиков входа
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            app.UseMicrosoftAccountAuthentication(
+                clientId: "67116cd4-7f8d-4661-9ea3-c0169435116e",
+                clientSecret: "hc3DcRx7O/4AMq@5mQXGQHTQIV:-fxv_"); 
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "516037628987680",
+               appSecret: "f6dcca261a4e7b7d77fb3b457a00fecb");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "904012300735-q2vv8tai8m6f9u8ekpmpthu3fk0qe7gl.apps.googleusercontent.com",
+                ClientSecret = "XCR7cu4RfIDPc_td0lmRg7eu",
+            });
         }
     }
 }

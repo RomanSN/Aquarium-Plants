@@ -1,36 +1,58 @@
 ﻿@model AquaMarket.Models.ExternalLoginConfirmationViewModel
 @{
-    ViewBag.Title = "Регистрация";
+    ViewBag.Title = "Registration";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>Связывание вашей учетной записи @ViewBag.LoginProvider.</h3>
 
-@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
+    <div id="extlogin_confirmation_page" class="partial_Lable partial_content">
+        <h2>@ViewBag.Title</h2>
+        <h3 style="text-align:center">Linking your account @ViewBag.LoginProvider.</h3>
 
-    <h4>Форма связи</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <p class="text-info">
-        Вы успешно прошли проверку подлинности через <strong>@ViewBag.LoginProvider</strong>
-            Введите имя пользователя на этом сайте ниже и нажмите кнопку "Зарегистрировать", чтобы завершить
-            вход.
-    </p>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-        </div>
+        @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <p class="text-info" style="text-align:center">
+                You have successfully authenticated through <strong>@ViewBag.LoginProvider</strong>
+                Enter your nickname and email on this site below and click "Register" to complete
+                entrance.
+            </p>
+            <div class="form-group">
+                @Html.LabelFor(m => m.NickName, new { @class = "col-md-5 control-label" })
+                <div class="col-md-7">
+                    @Html.TextBoxFor(m => m.NickName, new { @class = "form-control", placeholder = "Min length must be at least 6 characters." })
+                    @Html.ValidationMessageFor(m => m.NickName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-5 control-label" })
+                <div class="col-md-7">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Age, new { @class = "col-md-5 control-label" })
+                <div class="col-md-7">
+                    @Html.TextBoxFor(m => m.Age, new { @class = "form-control", placeholder = "the value must be from 18 to 100." })
+                    @Html.ValidationMessageFor(m => m.Age, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Country, new { @class = "col-md-5 control-label" })
+                <div class="col-md-7">
+                    @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Register" />
+                </div>
+            </div>
+        }
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Регистрация" />
-        </div>
-    </div>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

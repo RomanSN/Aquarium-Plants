@@ -22,8 +22,10 @@ namespace AquaMarket
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.css", "~/Content/bootstrap-social.css",
                       "~/Content/Site.css",  "~/Content/jquery-ui.*"));//"~/Content/PagedList.css",
+            bundles.Add(new StyleBundle("~/Lib/font-awesome/css").Include(
+                      "~/Lib/font-awesome/css/*.css"));
         }
     }
 }

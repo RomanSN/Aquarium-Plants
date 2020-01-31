@@ -444,8 +444,8 @@ input[type=file]{
     padding: 10px;
 }
 
-.partial_content h2,h4 {
-    text-align: center;
+.partial_content h2,h3,h4 {
+    text-align: center !important;
 }
 .partial_content hr {
     text-align: center;
@@ -623,4 +623,15 @@ input[type=file]{
 .submit_centered {
     display:flex;
     align-items:center;
+}
+/*Authentication section button_google*/
+
+#loginForm {
+    padding-right: 10px;
+}
+#socialLoginForm  {
+    padding-left: 10px;
+}
+#socialLoginForm [class*="btn"]{
+   width:200px !important;
 }
